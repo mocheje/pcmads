@@ -1,0 +1,442 @@
+/* begin Page */
+
+/* Created by Artisteer v3.0.0.45570 */
+
+#page-background-glare
+{
+  zoom: 1;
+}
+
+#page-background-glare-image
+{
+  position:absolute;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/page_gl.png',sizingMethod='crop')");
+  zoom: 1;
+}
+
+img
+{
+  filter: expression(artFixPNG(this));
+}
+
+.cleared 
+{
+    width:1px;
+}
+/* end Page */
+
+/* begin Header */
+
+.header-wrapper 
+{
+   width:expression(artFluidSheetComputedWidth('100%', 700, 1920));
+}  
+/* end Header */
+
+/* begin TextBlock */
+div.textblock
+{
+  font-size: 1px;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/textblock-bg.png',sizingMethod='scale')");
+}
+/* end TextBlock */
+
+/* begin HeaderObject */
+div.headerobject
+{
+  font-size: 1px;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/header-object.png',sizingMethod='scale')");
+}
+/* end HeaderObject */
+
+/* begin Box, Sheet */
+.sheet, .sheet-body
+{
+  zoom: 1;
+}
+
+.sheet-tr, .sheet-tl, .sheet-br, .sheet-bl, .sheet-tc, .sheet-bc,.sheet-cr, .sheet-cl
+{
+  font-size: 1px;
+  background: none;
+}
+
+.sheet-tr, .sheet-tl, .sheet-br, .sheet-bl
+{
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/sheet_s.png',sizingMethod='scale')");
+}
+
+.sheet-tl
+{
+  clip: rect(auto 13px 13px auto);
+}
+
+.sheet-tr
+{
+  left:expression(this.parentNode.offsetWidth-26+'px');
+  clip: rect(auto auto 13px 13px);
+}
+
+.sheet-bl
+{
+  top: expression(this.parentNode.offsetHeight-26+'px');
+  clip: rect(13px 13px auto auto);
+}
+
+.sheet-br
+{
+  top: expression(this.parentNode.offsetHeight-26+'px');
+  left:expression(this.parentNode.offsetWidth-26+'px');
+  clip: rect(13px auto auto 13px);
+}
+
+.sheet-tc, .sheet-bc
+{
+  width: expression(this.parentNode.offsetWidth-26+'px');
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/sheet_h.png',sizingMethod='scale')");
+}
+
+.sheet-tc
+{
+  clip: rect(auto auto 13px auto);
+}
+
+.sheet-bc
+{
+  top: expression(this.parentNode.offsetHeight-26+'px');
+  clip: rect(13px auto auto auto);
+}
+
+.sheet-cr, .sheet-cl
+{
+  height: expression(this.parentNode.offsetHeight-26+'px');
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/sheet_v.png',sizingMethod='scale')");
+}
+
+.sheet-cr
+{
+  left:expression(this.parentNode.offsetWidth-26+'px');
+  clip: rect(auto auto auto 13px);
+}
+
+.sheet-cl
+{
+  clip: rect(auto 13px auto auto);
+}
+
+.sheet-cc
+{
+  font-size: 1px;
+  width: expression(this.parentNode.offsetWidth-26+'px');
+  height: expression(this.parentNode.offsetHeight-26+'px');
+  background-color: #FFFFFF;
+}
+#page-background-top-texture, #page-background-middle-texture
+{
+  width: expression(document.body.clientWidth>700?"100%":"700px");
+}
+
+.sheet
+{
+   width:expression(artFluidSheetComputedWidth('100%', 700, 1920));
+}
+/* end Box, Sheet */
+
+/* begin Menu */
+.hmenu ul
+{
+  width: 1px;
+  height: 1%;
+}
+
+.hmenu li.hmenuhover
+{
+  z-index: 10000;
+}
+
+.hmenu .hmenuhoverUL
+{
+  visibility: visible;
+  top: 100%;
+  left: 0;
+}
+
+.hmenu .hmenuhoverUL .hmenuhoverUL
+{
+  top: 0;
+  left: 100%;
+}
+
+.hmenu, .hmenu ul a
+{
+  height: 1%;
+}
+
+.hmenu li li
+{
+  float: left;
+  width: 100%;
+}
+
+.nav
+{
+  zoom: 1;
+  height: 40px;
+}
+
+.nav-l, .nav-r
+{
+  font-size: 1px;
+  height: 40px;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/nav.png',sizingMethod='crop')");
+}
+
+.nav-l
+{
+  width: expression(this.parentNode.offsetWidth-0+'px');
+}
+
+.nav-r
+{
+  left: expression(this.parentNode.offsetWidth-1920+'px');
+  clip: rect(auto auto auto 1920px);
+}
+
+/* end Menu */
+
+/* begin MenuItem */
+.hmenu a
+{
+  display:inline-block;
+}
+
+.hmenu a:hover, .hmenuhoverA {
+	visibility:visible;
+}
+
+.hmenu a .r, .hmenu a .l
+{
+  font-size: 1px;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/menuitem.png',sizingMethod='crop')");
+}
+
+.hmenu a .r
+{
+  left:100%;
+  margin-left:-408px;
+  clip: rect(auto auto auto 404px);
+}
+
+.hmenu a .l
+{
+  width: expression(this.parentNode.offsetWidth-4+'px');
+}
+
+.hmenuhover .hmenuhoverA .t
+{
+  color: #000000;
+}
+
+.hmenuhover .hmenuhoverA .l, .hmenuhover .hmenuhoverA .r
+{
+  top: -28px;
+}
+/* end MenuItem */
+
+/* begin MenuSeparator */
+.nav .hmenu-separator
+{
+  font-size: 1px;
+  zoom: 1;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/menuseparator.png',sizingMethod='crop')");
+}
+
+/* end MenuSeparator */
+
+/* begin MenuSubItem */
+.hmenu ul a
+{
+  color: #0D3440 !important;
+}
+
+.hmenu ul a:hover {
+  color: #000000 !important;
+}	
+
+.hmenu ul .hmenuhover .hmenuhoverA
+{
+  color: #000000 !important;
+  border-color: #DACB58;
+  background-position: 0 -26px;
+}
+
+.nav .hmenu ul a:hover span, .nav .hmenu ul a:hover span span
+{
+  color: #000000 !important;
+}	
+
+.nav .hmenu ul .hmenuhover .hmenuhoverA span, .nav .hmenu ul .hmenuhover .hmenuhoverA span span
+{
+  color: #000000 !important;
+}
+
+/* end MenuSubItem */
+
+/* begin Layout */
+.content-layout, .content-layout-row {display: block;}
+.content-layout, .content-layout-row {zoom: 1;}
+/* end Layout */
+
+/* begin Box, Block */
+.block, .block-body
+{
+  zoom: 1;
+}
+/* end Box, Block */
+
+/* begin Box, BlockContent */
+.blockcontent, .blockcontent-body
+{
+  zoom: 1;
+}
+.blockcontent-body ul li
+{
+  height: 1%;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/blockcontentbullets.png',sizingMethod='crop')");
+}
+
+/* end Box, BlockContent */
+
+/* begin Button */
+.button-wrapper, .button-wrapper .button-l, .button-wrapper .button-r
+{
+  zoom: 1;
+}
+
+.button-wrapper .button
+{
+  float: left;
+}
+
+.button-wrapper .button-l, .button-wrapper .button-r
+{
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/button.png',sizingMethod='crop')");
+}
+
+.button-wrapper .button-r
+{
+  left:expression(this.parentNode.offsetWidth-411+'px');
+  clip: rect(auto auto auto 400px);
+}
+
+.button-wrapper .button-l
+{
+  width: expression(this.parentNode.offsetWidth-11+'px');
+}
+/* end Button */
+
+/* begin Box, Post */
+.post, .post-body
+{
+  zoom: 1;
+}
+/* end Box, Post */
+
+/* begin PostBullets */
+.post ul li, .post ol ul li
+{
+  height: 1%;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/postbullets.png',sizingMethod='crop')");
+  padding-left: 13px;
+  /* makes "ul li" not to align behind the image if they are in the same line */
+  overflow-x: visible;
+  overflow-y: hidden;
+}
+
+.post ul ol li
+{
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="");
+  padding-left: 0;
+  /* overrides overflow for "ul li" and sets the default value */
+  overflow: visible;
+}
+/* end PostBullets */
+
+/* begin PostQuote */
+.postcontent blockquote
+{
+  height: 1%;
+  background-image: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/postquote.png',sizingMethod='crop')");
+}
+/* end PostQuote */
+
+/* begin Footer */
+.footer-body
+{
+    padding-right: 0;
+  zoom:1;
+}
+
+.footer{
+  zoom:1;
+}
+
+.footer-t
+{
+  zoom: 1;
+  font-size: 1px;
+  height: expression(this.parentNode.offsetHeight-0+'px');
+  width: 100%;
+}
+
+/* end Footer */
+
+/* begin LayoutCell, sidebar1 */
+
+.content-layout .sidebar1
+{
+    background: none;
+}
+
+.sidebar1 .layout-bg
+{
+  position:absolute;
+  top:0;
+  left:0;
+  width:expression(this.parentNode.offsetWidth+'px');
+  height: expression(this.parentNode.offsetHeight+'px');
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/sidebar_bg.png',sizingMethod='scale')");
+}
+
+/* end LayoutCell, sidebar1 */
+
+/* begin LayoutCell, content */
+
+.content {width: auto;}
+.content-layout .layout-cell, .content-layout .layout-cell .content-layout .layout-cell
+{
+  display: block;
+  position:relative;
+  float: left;
+  clear: right;
+}
+.content-layout .layout-cell, .content-layout .layout-cell .content-layout .layout-cell {zoom:1;}
+
+.content-layout .content .block
+{
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"images/sidebar_bg.png',sizingMethod='scale')");
+}
+/* end LayoutCell, content */
+
