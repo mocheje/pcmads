@@ -1,1 +1,1 @@
-module.exports = "mssql://sa:hetalksinme2@localhost/PcmAds";
+module.exports = "mssql://sa:hetalksinme2@localhost/";

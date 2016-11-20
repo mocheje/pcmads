@@ -1,7 +1,7 @@
 //connect to mssql datasource
 var bcrypt   = require('bcrypt-nodejs');
 var sql = require('mssql');
-var credentials = require('../config/credentials');
+var credentials = require('../config/credentials') + "PcmAds";
 
 
 module.exports = function User (obj) {

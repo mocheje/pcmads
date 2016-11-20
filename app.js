@@ -3,7 +3,9 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser'); use busboy instead because of req.body
+//var bb = require('express-busboy');
+var multer = require('multer');
 var session      = require('express-session');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -21,6 +23,8 @@ var wbs_log = require('./routes/wbs_log');
 var uploadDoc = require('./routes/uploadDoc');
 
 var app = express();
+//extend app to use busboy
+//bb.extend(app);
 
 // Create `ExpressHandlebars` instance with a default layout.
 var hbs = exphbs.create({
@@ -34,6 +38,8 @@ var hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+app.use(multer({ dest: 'c:/sap_app/uploads/'}).any());
+
 // required for passport
 app.use(session({ secret: 'npdcpcmcommoncostbeninnnpc' })); // session secret
 app.use(passport.initialize());
@@ -43,20 +49,16 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', isAuthenticated, users);
 app.use('/logout', isAuthenticated, logout);
-app.use('/wbs_log', isAuthenticated, wbs_log);
 app.use('/convert_sap_export', isAuthenticated, convert_sap_export);
-app.use('/convert_pcm_export', isAuthenticated, convert_pcm_export);
-app.use('/gl_log', isAuthenticated, gl_log);
-app.use('/add_wbs', isAuthenticated, add_wbs);
-app.use('/add_gl', isAuthenticated, add_gl);
+app.use('/convert_pcm_export', isAuthenticated, convert_pcm_export);    
 app.use('/server/uploads', isAuthenticated, uploadDoc);
 
 
