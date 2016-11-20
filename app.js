@@ -11,15 +11,11 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 var exphbs = require('express-handlebars');
 
-var add_gl = require('./routes/add_gl');
-var add_wbs = require('./routes/add_wbs');
 var convert_pcm_export = require('./routes/convert_pcm_export');
 var convert_sap_export = require('./routes/convert_sap_export');
-var gl_log = require('./routes/gl_log');
 var index = require('./routes/index');
 var logout = require('./routes/logout');
 var users = require('./routes/users');
-var wbs_log = require('./routes/wbs_log');
 var uploadDoc = require('./routes/uploadDoc');
 
 var app = express();
