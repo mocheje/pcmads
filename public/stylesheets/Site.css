@@ -292,3 +292,12 @@ div.accountInfo
     text-align: right;
     padding-right: 10px;
 }
+
+.strike {
+    text-decoration: line-through;
+    background: dimgrey;
+}
+
+#loadButton {
+    cursor: hand;
+}

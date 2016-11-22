@@ -1,12 +1,15 @@
-<table style="width:100%" CELLPADDING="1" CELLSPACING="1" BORDER="1">
-    <tr>
-        <th>ModelID</th>
-        <th>ID</th>
-        <th>GL Account</th>
-        <th>Sender WBS</th>
-        <th>Allocation Driver</th>
-        <th>Receiver</th>
-    </tr>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ModelID</th>
+            <th>ID</th>
+            <th>GL Account</th>
+            <th>Sender WBS</th>
+            <th>Allocation Driver</th>
+            <th>Receiver</th>
+        </tr>
+    </thead>
+    <tbody>
         {{#each assignment}}
             <tr>
                 <td>{{MODELID}}</td>
@@ -17,4 +20,5 @@
                 <td>{{'RECEIVER'}}</td>
             </tr>
         {{/each}}
+    </tbody>
 </table>

@@ -1,20 +1,57 @@
-<table style="width:100%" CELLPADDING="1" CELLSPACING="1" BORDER="1">
-    <tr>
-        <th>ModelID</th>
-        <th>ID</th>
-        <th>GL Account</th>
-        <th>Sender WBS</th>
-        <th>Allocation Driver</th>
-        <th>Receiver</th>
-    </tr>
-        {{#each assignment}}
-            <tr>
-                <td>{{MODELID}}</td>
-                <td>{{ID}}</td>
-                <td>{{'GL ACCOUNT'}}</td>
-                <td>{{'SENDER WBS'}}</td>
-                <td>{{'ALLOCATION DRIVER'}}</td>
-                <td>{{'RECEIVER'}}</td>
-            </tr>
-        {{/each}}
-</table>
+<ul class="nav nav-tabs tabs-up" id="friends">
+    <li><a href="/pcm/gls" data-target="#gls" class="media_node active span" id="contacts_tab" data-toggle="tabajax" rel="tooltip"> Gl Accounts </a></li>
+    <li><a href="/pcm/senders" data-target="#senders" class="media_node span" id="friends_list_tab" data-toggle="tabajax" rel="tooltip"> Senders </a></li>
+    <li><a href="/pcm/assets" data-target="#receivers" class="media_node span" id="awaiting_request_tab" data-toggle="tabajax" rel="tooltip"> Receivers </a></li>
+    <li><a href="/pcm/drivers" data-target="#drivers" class="media_node span" id="awaiting_request_tab" data-toggle="tabajax" rel="tooltip">Allocation Drivers</a></li>
+    <li><a href="/pcm/uapcodes" data-target="#uapcodes" class="media_node span" id="awaiting_request_tab" data-toggle="tabajax" rel="tooltip">UAP CODES</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="gls">
+
+    </div>
+    <div class="tab-pane" id="senders">
+
+    </div>
+    <div class="tab-pane  urlbox span8" id="receivers">
+
+    </div>
+
+    <div class="tab-pane  urlbox span8" id="drivers">
+
+    </div>
+    <div class="tab-pane  urlbox span8" id="uapcodes">
+
+    </div>
+</div>
+
+
+
+<script>
+
+    $('[data-toggle="tabajax"]').click(function(e) {
+        //e.preventDefault();
+        var $this = $(this),
+                loadurl = $this.attr('href'),
+                targ = $this.attr('data-target');
+            console.log(targ);
+        $.get(loadurl, function(res) {
+            var data = res.data;
+            var html = "";
+            html += '<table class="table table-hover"> <thead><tr><th>Name</th></tr></thead><tbody>';
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                html += "<tr>";
+                console.log(item);
+                html += "<td>" + item.NAME + "</td>";
+                html += "</tr>";
+
+            }
+            html += '</tbody></table>';
+            $(targ).html(html);
+        });
+
+        $this.tab('show');
+        return false;
+    });
+</script>
