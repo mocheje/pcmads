@@ -17,6 +17,8 @@ var index = require('./routes/index');
 var logout = require('./routes/logout');
 var users = require('./routes/users');
 var uploadDoc = require('./routes/uploadDoc');
+var assignments = require('./routes/assignments');
+var pcm = require('./routes/pcm');
 
 var app = express();
 //extend app to use busboy
@@ -56,6 +58,8 @@ app.use('/logout', isAuthenticated, logout);
 app.use('/convert_sap_export', isAuthenticated, convert_sap_export);
 app.use('/convert_pcm_export', isAuthenticated, convert_pcm_export);    
 app.use('/server/uploads', isAuthenticated, uploadDoc);
+app.use('/assignments', isAuthenticated, assignments);
+app.use('/', isAuthenticated, pcm);
 
 
 // catch 404 and forward to error handler

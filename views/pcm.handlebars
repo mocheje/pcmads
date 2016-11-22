@@ -1,0 +1,20 @@
+<table style="width:100%" CELLPADDING="1" CELLSPACING="1" BORDER="1">
+    <tr>
+        <th>ModelID</th>
+        <th>ID</th>
+        <th>GL Account</th>
+        <th>Sender WBS</th>
+        <th>Allocation Driver</th>
+        <th>Receiver</th>
+    </tr>
+        {{#each assignment}}
+            <tr>
+                <td>{{MODELID}}</td>
+                <td>{{ID}}</td>
+                <td>{{'GL ACCOUNT'}}</td>
+                <td>{{'SENDER WBS'}}</td>
+                <td>{{'ALLOCATION DRIVER'}}</td>
+                <td>{{'RECEIVER'}}</td>
+            </tr>
+        {{/each}}
+</table>
