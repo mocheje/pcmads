@@ -3,7 +3,10 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var pcm = require('./models/pcm');
+var fs = require('fs');
+var sql = require('mssql');
+var credentials = require('./config/credentials') + "PCM";
+var pcmModel = require('./config.json').activemodel || 11;
 //var bodyParser = require('body-parser'); use busboy instead because of req.body
 //var bb = require('express-busboy');
 var multer = require('multer');
@@ -20,6 +23,7 @@ var users = require('./routes/users');
 var uploadDoc = require('./routes/uploadDoc');
 var assignments = require('./routes/assignments');
 var pcm = require('./routes/pcm');
+var scriptFolder = './script/';
 
 var app = express();
 //extend app to use busboy
@@ -57,7 +61,7 @@ app.use('/', index);
 app.use('/users', isAuthenticated, users);
 app.use('/logout', isAuthenticated, logout);
 app.use('/convert_sap_export', isAuthenticated, convert_sap_export);
-app.use('/convert_pcm_export', isAuthenticated, convert_pcm_export);    
+app.use('/convert_pcm_export', isAuthenticated, convert_pcm_export);
 app.use('/server/uploads', isAuthenticated, uploadDoc);
 app.use('/assignments', isAuthenticated, assignments);
 app.use('/', isAuthenticated, pcm);
@@ -81,7 +85,37 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-//Initialize Sql scripts if not created
+//Initialize Sql scripts will return error if view already exists
+sql.connect(credentials).then(function() {
+    fs.readdir(scriptFolder, function(err, files){
+        files.forEach(function(file){
+            fs.readFile(scriptFolder + file, "utf-8", function(err, data) {
+                //replace all @MODELID with modelId
+                data = data.replace("@MODELID", pcmModel);
+                try{
+                    new sql.Request().query(data)
+                        .then(function(recordset) {
+                            //expect to receive undefined if all goeas well
+                            if(recordset == undefined){
+                                console.log(file + " View Succesfully created for modelid " + pcmModel);
+                            } else {
+                                console.log(recordset);
+                            }
+                        }).catch(function(err) {
+                        // ... query error checks
+                        console.log(err);
+                    });
+                } catch(e){
+                    console.log(e);
+                }
+
+            })
+        });
+    });
+}).catch(function(err) {
+    // ... connect error checks
+    console.log(err);
+});
 
 function isAuthenticated(req, res, next) {
 
