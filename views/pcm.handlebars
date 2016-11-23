@@ -36,19 +36,21 @@
                 targ = $this.attr('data-target');
             console.log(targ);
         $.get(loadurl, function(res) {
-            var data = res.data;
-            var html = "";
-            html += '<table class="table table-hover"> <thead><tr><th>Name</th></tr></thead><tbody>';
-            for (var i = 0; i < data.length; i++) {
-                var item = data[i];
-                html += "<tr>";
-                console.log(item);
-                html += "<td>" + item.NAME + "</td>";
-                html += "</tr>";
+            if(res){
+                var data = res.data;
+                var html = "";
+                html += '<table class="table table-hover"> <thead><tr><th>Name</th></tr></thead><tbody>';
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    html += "<tr>";
+                    console.log(item);
+                    html += "<td>" + item.NAME + "</td>";
+                    html += "</tr>";
 
+                }
+                html += '</tbody></table>';
+                $(targ).html(html);
             }
-            html += '</tbody></table>';
-            $(targ).html(html);
         });
 
         $this.tab('show');

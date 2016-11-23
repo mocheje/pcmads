@@ -1,1 +1,2 @@
-module.exports = "mssql://sa:hetalksinme2@localhost/";
+secret = require('../secret.json');
+module.exports = "mssql://"+ secret.login + ":" + secret.password + "@localhost/";

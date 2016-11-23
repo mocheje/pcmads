@@ -34,4 +34,7 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# mssql credentials
+secret.json
+
 # Created by .ignore support plugin (hsz.mobi)
