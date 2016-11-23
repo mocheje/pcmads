@@ -77,6 +77,7 @@
 <!-- Your code to create an instance of Fine Uploader and bind to the DOM/template
 ====================================================================== -->
 <script>
+    remove = [];
     var restrictedUploader = new qq.FineUploader({
         element: document.getElementById("fine-uploader-validation"),
         template: 'qq-template-validation',
@@ -104,9 +105,10 @@
                     data = responseJSON.data;
                     validation = responseJSON.validations;
                     period = responseJSON.period;
-                    for (var i = 7; i < data.length; i++) {
+                    data.splice(0,7);  //remove headers
+                    for (var i = 0; i < data.length; i++) {
                         var item = data[i];
-                        html += "<tr><td><input type='checkbox' class='remove'></td>";  //line items starts at that position
+                        html += "<tr id='"+ i + "'><td><input type='checkbox' class='remove'></td>";  //line items starts at that position
                         html += "<td>" + item[2] + "</td>";  //GL Account
                         html += "<td>" + item[3] + "</td>";  //Line Item
                         html += "<td>" + item[5] + "</td>";  //WBS
@@ -126,18 +128,54 @@
                 }
                 $(".remove").change(function() {
                     if(this.checked) {
-                        console.log(this);
+                        //push to remove array
+                        remove.push($(this).closest('tr').attr('id'));
                         //strike through a tr line
                         $(this).closest("tr").addClass('strike');
                     } else {
-                        $(this).closest('tr').removeClass('strike');
+                        remove.splice(remove.indexOf($(this).closest('tr').attr('id')),1);
+                        $(this).closest("tr").removeClass('strike');
                     }
+                    console.log(remove);
                 });
                 $("#loadButton").removeClass('disabled hidden');
                 $("#exportButton").removeClass('disabled hidden');
                 $("#validateButton").removeClass('disabled hidden');
                 $("#loadButton").on('click', function () {
-                    console.log(data);
+                    swal({
+                                title: "Load to PCM",
+                                text: "Submit to Load data into PCM Bridge",
+                                type: "info",
+                                showCancelButton: true,
+                                closeOnConfirm: false,
+                                showLoaderOnConfirm: true,
+                            },
+                            function(){
+                                //remove all elements from data that has been highlighted in remove array
+                                for(var i = 0; i < remove.length; i++){
+                                    data.splice(data[remove[i]], 1);
+                                }
+                                //load data via ajax.
+                                // /server/dataload
+                                $.ajax({
+                                    url: '/server/dataload'
+                                    , type: 'POST'
+                                    , contentType: 'application/json'
+                                    , dataType: 'json'
+                                    , data: {'data': data}
+                                    , success: done.bind(this)
+                                    , error: fail.bind(this)
+//, processData: false //Doesn't help
+                                });
+                                function done(response){
+                                    console.log(response);
+                                    swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + data.length + " !", "" ,"success");
+                                }
+                                function fail(err){
+                                    console.log(err);
+                                    swal("Failed to laod data " + data.length + " !", "" ,"error");
+                                }
+                            });
                 });
                 var table = $('#uploaded').DataTable();
 
