@@ -4,6 +4,7 @@ var _ = require('underscore');
 
 module.exports = {
     getAssignments: function(callback){
+        console.log(credentials);
         sql.connect(credentials).then(function() {
             // Query
             new sql.Request().query('SELECT * FROM [PCM].[dbo].[PCMADS_COSTOBJECTASSIGNMENT]')
