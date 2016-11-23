@@ -34,15 +34,16 @@ router.post('/', function(req, res, next) {
         new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_LINEITEM]')
             .then(function(recordset) {
                 console.log("got here three");
-                for(var i = 0; i< data.length; i++){
+                for(var i = 0; i< 7; i++){
                     for(j=0;j<recordset.length;j++){
-                        if(data[i][3] == recordset[j].NAME.split('-')[0].replace(/\s+/g, '')){
+                        if(data[i][3] == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[i][3] = recordset[j].NAME;
+                            console.log(data[i][3]);
                             break;
                         }
                     }
                 }
-                console.log(data);
+                //console.log(data);
                 inform();
             });
 
@@ -59,6 +60,7 @@ router.post('/', function(req, res, next) {
                     values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
                 }
                 var query = "INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
+                console.log(query);
                 new sql.Request().query(query)
                     .then(function(recordset) {
                         res.json({success: true});
