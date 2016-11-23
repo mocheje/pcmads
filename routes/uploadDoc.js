@@ -61,11 +61,7 @@ router.post('/', function(req, res, next) {
         }
 
     }
-
-    console.log(gls, gls.length);
-    console.log(wbs, wbs.length);
-    console.log(glwbs, wbs.length);
-
+    
     //get objects and compare with uploaded data
     sql.connect(credentials).then(function() {
         // Query

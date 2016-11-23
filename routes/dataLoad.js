@@ -6,42 +6,70 @@ var credentials = require('../config/credentials') + "PCM";
 /* GET users listing. */
 router.post('/', function(req, res, next) {
     //get data
-    var data = req.body.data.length;
-    console.log(data);
-
+    var data = req.body.data;
+    var period = req.body.period;
+    var values = "";
     //get objects and compare with uploaded data
-    // var version = "Actual";  //hard coded based on PCM version only Actual exists for now
-    // for(var i = 7; i< data.length; i++){
-    //     var char = "";
-    //     if(i === data.length - 1){
-    //         char = ",";
-    //     } else {
-    //         char = ";"
-    //     }
-    //     var LineItem = data[i][3];
-    //     var sender = data[i][5];
-    //     var currency = data[i][10];
-    //     var value = data[i][9];
-    //
-    //     //get lineitem name and sendername
-    //
-    // }
-    // VALUES = "('" + version + "','" + period + "','" +RespCenterName + "','" + LineItemName + "','" + currency + "','" + value + "')" + char ;
-    // var query = "INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES ";
-    // sql.connect(credentials).then(function() {
-    //     new sql.Request().query(query)
-    //         .then(function(recordset) {
-    //             callback(null, recordset);
-    //         }).catch(function(err) {
-    //         // ... query error checks
-    //         callback(err);
-    //     });
-    // }).catch(function(err) {
-    //     // ... connect error checks
-    //     callback(err);
-    // });
+    var version = "Actual";  //hard coded based on PCM version only Actual exists for now
+    var completed = 0;
+    console.log("got here");
+    //implement DRY methods to handle this .... rushing to meet deadline
 
-    res.json({success: true});
+    sql.connect(credentials).then(function() {
+        new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_RESPCENTER]')
+            .then(function(recordset) {
+                console.log("got here too");
+                for(var i = 0; i< data.length; i++){
+                    for(j=0;j<recordset.length;j++){
+                        if(data[i][5] == recordset[j].NAME.split('-')[0].replace(/\s+/g, '')){
+                            data[i][5] = recordset[j].NAME;
+                            break;
+                        }
+                    }
+                }
+                //console.log(data);
+                inform()
+            });
+
+        new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_LINEITEM]')
+            .then(function(recordset) {
+                console.log("got here three");
+                for(var i = 0; i< data.length; i++){
+                    for(j=0;j<recordset.length;j++){
+                        if(data[i][3] == recordset[j].NAME.split('-')[0].replace(/\s+/g, '')){
+                            data[i][3] = recordset[j].NAME;
+                            break;
+                        }
+                    }
+                }
+                console.log(data);
+                inform();
+            });
+
+
+        function inform(){
+            completed += 1;
+            console.log(completed, " as completed");
+            if(completed == 2){
+                var char = ",";
+                for (var i = 0; i<data.length; i++){
+                    if(i == data.length - 1)
+                        char = ";";
+                    var gl = data[i][3], wbs = data[i][5], currency = data[i][10];
+                    values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
+                }
+                var query = "INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
+                new sql.Request().query(query)
+                    .then(function(recordset) {
+                        res.json({success: true});
+                    })
+            }
+        };
+
+    }).catch(function(err) {
+        // ... connect error checks
+        console.log(err);
+    });
 });
 
 module.exports = router;

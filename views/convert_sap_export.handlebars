@@ -162,7 +162,7 @@
                                     , type: 'POST'
                                     , contentType: 'application/json'
                                     , dataType: 'json'
-                                    , data: JSON.stringify({"data": data})
+                                    , data: JSON.stringify({"data": data, "period": period})
                                     , success: done.bind(this)
                                     , error: fail.bind(this)
 //, processData: false //Doesn't help
