@@ -21,7 +21,6 @@ router.post('/', function(req, res, next) {
                     for(var l=0;l<recordset.length;l++){
                         if(data[k][5] == recordset[l].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[k][5] = recordset[l].NAME;
-                            console.log(data[k][5]);
                             break;
                         }
                     }
@@ -35,7 +34,6 @@ router.post('/', function(req, res, next) {
                     for(var j=0;j<recordset.length;j++){
                         if(data[i][3] == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[i][3] = recordset[j].NAME;
-                            //console.log(data[i][3]);
                             break;
                         }
                     }
@@ -52,7 +50,7 @@ router.post('/', function(req, res, next) {
                     if(i == data.length - 1){
                         char = ";";
                     }
-                    var gl = data[i][3], wbs = data[i][5], currency = data[i][10];
+                    var gl = data[i][3], wbs = data[i][5], currency = data[i][10], value = data[i][9];
                     console.log(gl + " " + wbs );
                     values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
                 }
