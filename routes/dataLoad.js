@@ -12,33 +12,31 @@ router.post('/', function(req, res, next) {
     //get objects and compare with uploaded data
     var version = "Actual";  //hard coded based on PCM version only Actual exists for now
     var completed = 0;
-    console.log("got here");
     //implement DRY methods to handle this .... rushing to meet deadline
 
     sql.connect(credentials).then(function() {
         new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_RESPCENTER]')
             .then(function(recordset) {
-                console.log("got here too");
-                for(var i = 0; i< data.length; i++){
-                    for(j=0;j<recordset.length;j++){
-                        if(data[i][5] == recordset[j].NAME.split('-')[0].replace(/\s+/g, '')){
-                            data[i][5] = recordset[j].NAME;
+                for(var k = 0; k< data.length; k++){
+                    for(l=0;l<recordset.length;l++){
+                        console.log(data[k][5]);
+                        if(data[k][5] == recordset[l].NAME.split('-')[0].toString().replace(/\s+/g, '')){
+                            data[k][5] = recordset[l].NAME;
+                            console.log(data[k][5]);
                             break;
                         }
                     }
                 }
-                //console.log(data);
-                inform()
+                inform();
             });
 
         new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_LINEITEM]')
             .then(function(recordset) {
-                console.log("got here three");
                 for(var i = 0; i< data.length; i++){
                     for(j=0;j<recordset.length;j++){
                         if(data[i][3] == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[i][3] = recordset[j].NAME;
-                            console.log(data[i][3]);
+                            //console.log(data[i][3]);
                             break;
                         }
                     }
