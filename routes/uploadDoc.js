@@ -40,10 +40,10 @@ router.post('/', function(req, res, next) {
         var ledger = data[2][data[2].length - 1];
         console.log(ledger);
         var validations = {};
-        console.log("got here");
     } catch (e){
         console.log(e);
     }
+    var completed = 0;
     //get all unique gls and wbs
     var glflags = [], wbsflags = [], glwbsflags = [], gls = [], wbs = [], glwbs = [], l = data.length, i;
     var processed = 0;
@@ -61,7 +61,7 @@ router.post('/', function(req, res, next) {
         }
 
     }
-    
+
     //get objects and compare with uploaded data
     sql.connect(credentials).then(function() {
         // Query
@@ -90,7 +90,7 @@ router.post('/', function(req, res, next) {
                 } else {
                     console.log(err);
                 }
-                processed += 1;
+                inform();
             }).catch(function(err) {
             // ... query error checks
             console.log(err);
@@ -121,7 +121,7 @@ router.post('/', function(req, res, next) {
                 } else {
                     console.log(err);
                 }
-                processed += 1;
+                inform();
             }).catch(function(err) {
             // ... query error checks
             console.log(err);
@@ -152,7 +152,7 @@ router.post('/', function(req, res, next) {
                 } else {
                     console.log(err);
                 }
-                processed += 1;
+                inform();
             }).catch(function(err) {
             // ... query error checks
             console.log(err);
@@ -163,12 +163,12 @@ router.post('/', function(req, res, next) {
     });
 
     //quick hack to check if processing is complete will use promise later
-    setTimeout(function(){
-        console.log(processed, " time(s) processing");
-        if(processed == 3){
+    function inform(){
+        completed += 1;
+        if (completed === 3){
             res.json({success: true, period: period, validations: validations, data:  data});
         }
-    }, 1000);
+    }
 });
 
 module.exports = router;
