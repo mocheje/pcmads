@@ -114,6 +114,21 @@ sql.connect(credentials).then(function() {
         });
         console.log("Application started Please visit http://localhost:3000")
     });
+
+    //create the dataBridge table if it does not exist will handle this properly but for now lets roll with this
+    try{
+        new sql.Request().query("CREATE TABLE [dbo].[PCMADS_BRIDGE](" +
+            "[VersionName] [nchar](10) NOT NULL," +
+            "[PeriodName] [nchar](10) NOT NULL," +
+            "[RespCenterName] [nvarchar](100) NOT NULL," +
+            "[LineItemName] [nchar](100) NOT NULL," +
+            "[CurrencyName] [nchar](10) NOT NULL," +
+            "[LineItemValue] [numeric](38, 10) NOT NULL)"
+    )
+    } catch (e){
+        console.log(e);
+    }
+
 }).catch(function(err) {
     // ... connect error checks
     console.log(err);

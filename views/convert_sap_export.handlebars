@@ -14,7 +14,7 @@
         <div class="qq-upload-button pull-right btn disabled hidden" id="loadButton">
             <div>Load To PCM</div>
         </div>
-        <div class="qq-upload-button pull-right btn disabled hidden" id="Validation">
+        <div class="qq-upload-button pull-right btn disabled hidden" id="validateButton">
             <div>Validations</div>
         </div>
         <div class="qq-upload-button btn disabled hidden" id="exportButton">
@@ -103,6 +103,7 @@
                     html += '<table id="uploaded" class="display" cellspacing="0"><thead><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></thead><tfoot><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></tfoot><tbody>';
                     data = responseJSON.data;
                     validation = responseJSON.validations;
+                    period = responseJSON.period;
                     for (var i = 7; i < data.length; i++) {
                         var item = data[i];
                         html += "<tr><td><input type='checkbox' class='remove'></td>";  //line items starts at that position
@@ -134,7 +135,7 @@
                 });
                 $("#loadButton").removeClass('disabled hidden');
                 $("#exportButton").removeClass('disabled hidden');
-                $("#validation").removeClass('disabled hidden');
+                $("#validateButton").removeClass('disabled hidden');
                 $("#loadButton").on('click', function () {
                     console.log(data);
                 });
