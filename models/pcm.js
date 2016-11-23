@@ -127,6 +127,38 @@ module.exports = {
             // ... connect error checks
             callback(err);
         });
+    },
+    createView: function(str, callback){
+        console.log(credentials);
+        sql.connect(credentials).then(function() {
+            // Query
+            new sql.Request().query(str)
+                .then(function(recordset) {
+                    callback(null, recordset);
+                }).catch(function(err) {
+                // ... query error checks
+                callback(err);
+            });
+        }).catch(function(err) {
+            // ... connect error checks
+            callback(err);
+        });
+    },
+    checkView: function(view, callback){
+        console.log(credentials);
+        sql.connect(credentials).then(function() {
+            // Query
+            new sql.Request().query(str)
+                .then(function(recordset) {
+                    callback(null, recordset);
+                }).catch(function(err) {
+                // ... query error checks
+                callback(err);
+            });
+        }).catch(function(err) {
+            // ... connect error checks
+            callback(err);
+        });
     }
 };
 

@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var pcm = require('./models/pcm');
 //var bodyParser = require('body-parser'); use busboy instead because of req.body
 //var bb = require('express-busboy');
 var multer = require('multer');
@@ -79,6 +80,8 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+//Initialize Sql scripts if not created
 
 function isAuthenticated(req, res, next) {
 
