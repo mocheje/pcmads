@@ -112,7 +112,7 @@ sql.connect(credentials).then(function() {
 
             })
         });
-        Console.log("Application started Please visit http://localhost:3000")
+        console.log("Application started Please visit http://localhost:3000")
     });
 }).catch(function(err) {
     // ... connect error checks
