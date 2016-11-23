@@ -14,6 +14,9 @@
         <div class="qq-upload-button pull-right btn disabled hidden" id="loadButton">
             <div>Load To PCM</div>
         </div>
+        <div class="qq-upload-button btn disabled hidden" id="exportButton">
+            <div>Export Excel</div>
+        </div>
             <span class="qq-drop-processing-selector qq-drop-processing">
                 <span>Processing dropped files...</span>
                 <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
@@ -93,29 +96,27 @@
                 swal("Processing Complete!", "File Uploaded and validation complete", "success");
                 if (responseJSON.success) {
                     var html = "";
-                    html += '<table class="table table-hover" style="width: 100%; overflow: scroll"><tbody>';
-                        data = responseJSON.data;
-                        validation = responseJSON.validations;
-
-                    for (var i = 0; i < data.length; i++) {
+                    html += '<table id="uploaded" class="display" cellspacing="0"><thead><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></thead><tfoot><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></tfoot><tbody>';
+                    data = responseJSON.data;
+                    validation = responseJSON.validations;
+                    for (var i = 7; i < data.length; i++) {
                         var item = data[i];
-                        if(i>6){
-                            html += "<tr><td><input type='checkbox' class='remove'></td>";  //line items starts at that position
-                        } else if(i== 5) {
-                            html += "<tr><td>Remove Line</td>";
-                        } else {
-                            html += "<tr>";
-                        }
-                        for(var j = 0; j< item.length; j++){
-                            var content = item[j] || "";
-                            html += "<td>" + content + "</td>";
-                        }
-
+                        html += "<tr><td><input type='checkbox' class='remove'></td>";  //line items starts at that position
+                        html += "<td>" + item[2] + "</td>";  //GL Account
+                        html += "<td>" + item[3] + "</td>";  //Line Item
+                        html += "<td>" + item[5] + "</td>";  //WBS
+                        html += "<td>" + item[7] + "</td>";  //Date
+                        html += "<td>" + item[8] + "</td>";  //Posting Key
+                        html += "<td>" + item[9] + "</td>";  //Amount
+                        html += "<td>" + item[10] + "</td>";  //Currency
+                        html += "<td>" + item[11] + "</td>";  //Tax
+                        html += "<td>" + item[12] + "</td>";  //Profit Center
+                        html += "<td>" + item[14] + "</td>";  //Text
+                        html += "<td>" + item[15] + "</td>";  //Type
                         html += "</tr>";
-
                     }
 
-                    html += '</table>';
+                    html += '</tbody></table>';
                     $('#data').append(html);
                 }
                 $(".remove").change(function() {
@@ -128,8 +129,18 @@
                     }
                 });
                 $("#loadButton").removeClass('disabled hidden');
+                $("#exportButton").removeClass('disabled hidden');
                 $("#loadButton").on('click', function () {
                     console.log(data);
+                });
+                var table = $('#uploaded').DataTable();
+
+                $('#exportButton').on('click', function(){
+                    $('<table>').append(table.$('tr').clone()).table2excel({
+                        exclude: ".excludeThisClass",
+                        name: "Worksheet Name",
+                        filename: "exported" + responseJSON.period //do not include extension
+                    });
                 });
             }
         }

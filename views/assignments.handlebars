@@ -1,14 +1,32 @@
-<table class="table table-hover">
+<div>
+    <h1 style="text-align: center">Cost Object Assignments</h1>
+</div>
+<table id="assignment" class="display">
+
     <thead>
-        <tr>
-            <th>ModelID</th>
-            <th>ID</th>
-            <th>GL Account</th>
-            <th>Sender WBS</th>
-            <th>Allocation Driver</th>
-            <th>Receiver</th>
-        </tr>
+
+    <tr>
+        <th>ModelID</th>
+        <th>ID</th>
+        <th>GL Account</th>
+        <th>Sender WBS</th>
+        <th>Allocation Driver</th>
+        <th>Receiver</th>
+    </tr>
+
     </thead>
+
+    <tfoot>
+    <tr>
+        <th>ModelID</th>
+        <th>ID</th>
+        <th>GL Account</th>
+        <th>Sender WBS</th>
+        <th>Allocation Driver</th>
+        <th>Receiver</th>
+    </tr>
+    </tfoot>
+
     <tbody>
         {{#each assignment}}
             <tr>
@@ -22,3 +40,7 @@
         {{/each}}
     </tbody>
 </table>
+
+<script>
+    var table = $('#assignment').DataTable();
+</script>

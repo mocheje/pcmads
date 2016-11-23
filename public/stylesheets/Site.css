@@ -9,6 +9,9 @@ body
     margin: 0px;
     padding: 0px;
     color: #696969;
+    width: 100% !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 a:link, a:visited
@@ -300,4 +303,9 @@ div.accountInfo
 
 #loadButton {
     cursor: hand;
+}
+
+.dataTables_wrapper {
+    overflow: scroll;
+    min-width: 400px;
 }

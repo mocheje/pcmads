@@ -28,18 +28,17 @@
 
 
 <script>
-
     $('[data-toggle="tabajax"]').click(function(e) {
         //e.preventDefault();
         var $this = $(this),
                 loadurl = $this.attr('href'),
                 targ = $this.attr('data-target');
-            console.log(targ);
+                title = targ.replace("#", '');
         $.get(loadurl, function(res) {
             if(res){
                 var data = res.data;
-                var html = "";
-                html += '<table class="table table-hover"> <thead><tr><th>Name</th></tr></thead><tbody>';
+                var html = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                html += '<table class="dispaly dataTable"> <thead><tr><th>Name</th></tr></thead><tfoot><tr><th>Name</th></tr></tfoot><tbody>';
                 for (var i = 0; i < data.length; i++) {
                     var item = data[i];
                     html += "<tr>";
@@ -50,9 +49,9 @@
                 }
                 html += '</tbody></table>';
                 $(targ).html(html);
+                var table = $('.dataTable').DataTable();
             }
         });
-
         $this.tab('show');
         return false;
     });
