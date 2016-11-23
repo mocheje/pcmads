@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
         new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_LINEITEM]')
             .then(function(recordset) {
                 console.log("got here three");
-                for(var i = 0; i< 7; i++){
+                for(var i = 0; i< data.length; i++){
                     for(j=0;j<recordset.length;j++){
                         if(data[i][3] == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[i][3] = recordset[j].NAME;
@@ -43,26 +43,27 @@ router.post('/', function(req, res, next) {
                         }
                     }
                 }
-                //console.log(data);
                 inform();
             });
 
 
         function inform(){
             completed += 1;
-            console.log(completed, " as completed");
             if(completed == 2){
                 var char = ",";
                 for (var i = 0; i<data.length; i++){
-                    if(i == data.length - 1)
+                    if(i == data.length - 1){
                         char = ";";
+                    }
                     var gl = data[i][3], wbs = data[i][5], currency = data[i][10];
+                    console.log(gl + " " + wbs );
                     values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
                 }
-                var query = "INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
+                var query = "TRUNCATE TABLE [PCM].[dbo].[PCMADS_BRIDGE]; INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
                 console.log(query);
                 new sql.Request().query(query)
                     .then(function(recordset) {
+                        console.log(recordset);
                         res.json({success: true});
                     })
             }
