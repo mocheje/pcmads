@@ -18,8 +18,7 @@ router.post('/', function(req, res, next) {
         new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_RESPCENTER]')
             .then(function(recordset) {
                 for(var k = 0; k< data.length; k++){
-                    for(l=0;l<recordset.length;l++){
-                        console.log(data[k][5]);
+                    for(var l=0;l<recordset.length;l++){
                         if(data[k][5] == recordset[l].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[k][5] = recordset[l].NAME;
                             console.log(data[k][5]);
@@ -33,7 +32,7 @@ router.post('/', function(req, res, next) {
         new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_LINEITEM]')
             .then(function(recordset) {
                 for(var i = 0; i< data.length; i++){
-                    for(j=0;j<recordset.length;j++){
+                    for(var j=0;j<recordset.length;j++){
                         if(data[i][3] == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[i][3] = recordset[j].NAME;
                             //console.log(data[i][3]);
