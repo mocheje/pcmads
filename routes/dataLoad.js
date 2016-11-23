@@ -55,10 +55,8 @@ router.post('/', function(req, res, next) {
                     values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
                 }
                 var query = "TRUNCATE TABLE [PCM].[dbo].[PCMADS_BRIDGE]; INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
-                console.log(query);
                 new sql.Request().query(query)
                     .then(function(recordset) {
-                        console.log(recordset);
                         res.json({success: true});
                     })
             }

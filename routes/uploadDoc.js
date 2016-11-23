@@ -30,15 +30,12 @@ router.post('/', function(req, res, next) {
         var splname = filename.split(' ');
         var period = splname[1] + Month[splname[0]];
         //match with regular expression to confirm if period is valid
-        console.log(period);
         var numOfRecords = obj[0].data.length;
         var data = obj[0].data;
         //get company code
         var compCode = data[1][data[1].length - 1];
-        console.log(compCode);
         // get ledger
         var ledger = data[2][data[2].length - 1];
-        console.log(ledger);
         var validations = {};
     } catch (e){
         console.log(e);
@@ -78,12 +75,9 @@ router.post('/', function(req, res, next) {
                     for(var i = 0; i<glwbs.length; i++){
                         var found = _.where(reformattedResponse, glwbs[i]);
                         if(found.length > 1){
-                            console.log("multiple assignment for this object");
                             validations.multipleassignments.push(found);
                         } else if(found.length == 1){
-                            console.log("Found correct assignment for this object");
                         } else {
-                            console.log("No assignment for this object");
                             validations.assignments.push(glwbs[i]);
                         }
                     }
@@ -109,12 +103,9 @@ router.post('/', function(req, res, next) {
                     for(var i = 0; i<gls.length; i++){
                         var found = _.where(reformattedResponse, {gl: gls[i].toString()});
                         if(found.length > 1){
-                            console.log("multiple assignment for this object");
                             validations.multiplegls.push(found);
                         } else if(found.length == 1){
-                            console.log("Found correct assignment for this object");
                         } else {
-                            console.log("No assignment for this object");
                             validations.gls.push(gls[i]);
                         }
                     }
@@ -132,7 +123,6 @@ router.post('/', function(req, res, next) {
                 if(response) {
                     validations.wbs = [];
                     validations.multiplewbs = [];
-                    console.log(response);
                     var reformattedResponse = response.map(function(obj){
                         obj.wbs = obj.NAME.split("-")[0].replace(/\s+/g, '');
                         return obj;
@@ -140,12 +130,9 @@ router.post('/', function(req, res, next) {
                     for(var i = 0; i<wbs.length; i++){
                         var found = _.where(reformattedResponse, {wbs: wbs[i]});
                         if(found.length > 1){
-                            console.log("multiple assignment for this object");
                             validations.multiplewbs.push(found);
                         } else if(found.length == 1){
-                            console.log("Found correct assignment for this object");
                         } else {
-                            console.log("No assignment for this object");
                             validations.wbs.push(wbs[i]);
                         }
                     }

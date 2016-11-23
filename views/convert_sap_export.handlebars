@@ -141,6 +141,9 @@
                 $("#loadButton").removeClass('disabled hidden');
                 $("#exportButton").removeClass('disabled hidden');
                 $("#validateButton").removeClass('disabled hidden');
+                $("#validateButton").on('click', function () {
+                    console.log("Validation Clicked");
+                });
                 $("#loadButton").on('click', function () {
                     swal({
                                 title: "Load to PCM",
@@ -152,8 +155,9 @@
                             },
                             function(){
                                 //remove all elements from data that has been highlighted in remove array
+                                var newdata = data;
                                 for(var i = 0; i < remove.length; i++){
-                                    data.splice(data[remove[i]], 1);
+                                    newdata.splice(data[remove[i]], 1);
                                 }
                                 //load data via ajax.
                                 // /server/dataload
@@ -162,18 +166,18 @@
                                     , type: 'POST'
                                     , contentType: 'application/json'
                                     , dataType: 'json'
-                                    , data: JSON.stringify({"data": data, "period": period})
+                                    , data: JSON.stringify({"data": newdata, "period": period})
                                     , success: done.bind(this)
                                     , error: fail.bind(this)
 //, processData: false //Doesn't help
                                 });
                                 function done(response){
                                     console.log(response);
-                                    swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + data.length + " !", "" ,"success");
+                                    swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + newdata.length + " !", "" ,"success");
                                 }
                                 function fail(err){
                                     console.log(err);
-                                    swal("Failed to laod data " + data.length + " !", "" ,"error");
+                                    swal("Failed to laod data " + newdata.length + " !", "" ,"error");
                                 }
                             });
                 });
