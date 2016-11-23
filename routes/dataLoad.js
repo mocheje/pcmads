@@ -6,7 +6,7 @@ var credentials = require('../config/credentials') + "PCM";
 /* GET users listing. */
 router.post('/', function(req, res, next) {
     //get data
-    var data = req.body;
+    var data = req.body.data.length;
     console.log(data);
 
     //get objects and compare with uploaded data

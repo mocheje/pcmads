@@ -7,7 +7,7 @@ var fs = require('fs');
 var sql = require('mssql');
 var credentials = require('./config/credentials') + "PCM";
 var pcmModel = require('./config.json').activemodel || 11;
-//var bodyParser = require('body-parser'); use busboy instead because of req.body
+var bodyParser = require('body-parser'); //use busboy instead because of req.body
 //var bb = require('express-busboy');
 var multer = require('multer');
 var session      = require('express-session');
@@ -42,8 +42,6 @@ var hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-app.use(multer({ dest: 'c:/sap_app/uploads/'}).any());
-
 // required for passport
 app.use(session({ secret: 'npdcpcmcommoncostbeninnnpc' })); // session secret
 app.use(passport.initialize());
@@ -53,10 +51,12 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({limit: '5mb'}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(multer({ dest: 'c:/sap_app/uploads/'}).any());
 
 app.use('/', index);
 app.use('/users', isAuthenticated, users);

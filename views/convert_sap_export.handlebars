@@ -17,7 +17,7 @@
         <div class="qq-upload-button pull-right btn disabled hidden" id="validateButton">
             <div>Validations</div>
         </div>
-        <div class="qq-upload-button btn disabled hidden" id="exportButton">
+        <div class="qq-upload-button pull-right btn disabled hidden" id="exportButton">
             <div>Export Excel</div>
         </div>
             <span class="qq-drop-processing-selector qq-drop-processing">
@@ -162,7 +162,7 @@
                                     , type: 'POST'
                                     , contentType: 'application/json'
                                     , dataType: 'json'
-                                    , data: {'data': data}
+                                    , data: JSON.stringify({"data": data})
                                     , success: done.bind(this)
                                     , error: fail.bind(this)
 //, processData: false //Doesn't help
