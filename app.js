@@ -103,7 +103,8 @@ sql.connect(credentials).then(function() {
                             }
                         }).catch(function(err) {
                         // ... query error checks
-                        console.log(err);
+                        console.log("Initialization objects alrady exist");
+                        // logger.log(err);
                     });
                 } catch(e){
                     console.log(e);
@@ -111,6 +112,7 @@ sql.connect(credentials).then(function() {
 
             })
         });
+        Console.log("Application started Please visit http://<servername>:3000")
     });
 }).catch(function(err) {
     // ... connect error checks
