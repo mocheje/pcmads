@@ -14,6 +14,9 @@
         <div class="qq-upload-button pull-right btn disabled hidden" id="loadButton">
             <div>Load To PCM</div>
         </div>
+        <div class="qq-upload-button pull-right btn disabled hidden" id="Validation">
+            <div>Validations</div>
+        </div>
         <div class="qq-upload-button btn disabled hidden" id="exportButton">
             <div>Export Excel</div>
         </div>
@@ -67,6 +70,7 @@
 <!-- Fine Uploader DOM Element
 ====================================================================== -->
 <div id="fine-uploader-validation"></div>
+<!-- Trigger the modal with a button -->
 
 <div id="data">
 </div>
@@ -130,6 +134,7 @@
                 });
                 $("#loadButton").removeClass('disabled hidden');
                 $("#exportButton").removeClass('disabled hidden');
+                $("#validation").removeClass('disabled hidden');
                 $("#loadButton").on('click', function () {
                     console.log(data);
                 });
