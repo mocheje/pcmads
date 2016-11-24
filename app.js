@@ -94,49 +94,55 @@ sql.connect(credentials).then(function() {
         var dropQuery = "";
 
         files.forEach(function(file){
-            dropQuery = "DROP VIEW [dbo].[" + file + "];"
+            dropQuery += "DROP VIEW [dbo].[" + file + "];"
         });
+        console.log(dropQuery);
         try{
             new sql.Request().query(dropQuery)
                 .then(function(recordset) {
+                    console.log(recordset);
                     //expect to receive undefined if all goeas well
                     if(recordset == undefined){
                         console.log(file + " Dropping all previous views");
                     } else {
                         console.log(recordset);
                     }
+                    initView();
                 }).catch(function(err) {
                 // ... query error checks
-                console.log("Initialization objects alrady exist");
+                console.log("Nothing to Drop will proceed to create");
+                initView();
                 // logger.log(err);
             });
         } catch(e){
             console.log(e);
         }
-        files.forEach(function(file){
-            fs.readFile(scriptFolder + file, "utf-8", function(err, data) {
-                //replace all @MODELID with modelId
-                data = data.replace("@MODELID", pcmModel);
-                try{
-                    new sql.Request().query(data)
-                        .then(function(recordset) {
-                            //expect to receive undefined if all goeas well
-                            if(recordset == undefined){
-                                console.log(file + " View Succesfully created for modelid " + pcmModel);
-                            } else {
-                                console.log(recordset);
-                            }
-                        }).catch(function(err) {
-                        // ... query error checks
-                        console.log("Initialization objects alrady exist");
-                        // logger.log(err);
-                    });
-                } catch(e){
-                    console.log(e);
-                }
+        function initView(){
+            files.forEach(function(file){
+                fs.readFile(scriptFolder + file, "utf-8", function(err, data) {
+                    //replace all @MODELID with modelId
+                    data = data.replace("@MODELID", pcmModel);
+                    try{
+                        new sql.Request().query(data)
+                            .then(function(recordset) {
+                                //expect to receive undefined if all goeas well
+                                if(recordset == undefined){
+                                    console.log(file + " View Succesfully created for modelid " + pcmModel);
+                                } else {
+                                    console.log(recordset);
+                                }
+                            }).catch(function(err) {
+                            // ... query error checks
+                            console.log("Initialization objects alrady exist");
+                            // logger.log(err);
+                        });
+                    } catch(e){
+                        console.log(e);
+                    }
 
-            })
-        });
+                })
+            });
+        }
         console.log("Application started Please visit http://localhost:3000")
     });
 
