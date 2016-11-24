@@ -62,7 +62,7 @@ router.post('/', function(req, res, next) {
     //get objects and compare with uploaded data
     sql.connect(credentials).then(function() {
         // Query
-        new sql.Request().query('SELECT * FROM [PCM].[dbo].[PCMADS_COSTOBJECTASSIGNMENT]')
+        new sql.Request().query('SELECT DISTINCT [GL ACCOUNT], [SENDER WBS] FROM [PCM].[dbo].[PCMADS_COSTOBJECTASSIGNMENT]')
             .then(function(response) {
                 if(response) {
                     validations.assignments = [];
@@ -70,6 +70,7 @@ router.post('/', function(req, res, next) {
                     var reformattedResponse = response.map(function(obj){
                         obj.wbs = obj['GL ACCOUNT'].split("-")[0].replace(/\s+/g, '');
                         obj.gl = obj['SENDER WBS'].split("-")[0].replace(/\s+/g, '');
+                        console.log(obj);
                         return obj;
                     });
                     for(var i = 0; i<glwbs.length; i++){
