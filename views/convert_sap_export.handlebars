@@ -183,7 +183,7 @@
                     //GL validation population
                     var gls = validation.gls;
                     if (gls.length > 0 ){
-                        var glhtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        var glhtml = "<div><h1 style='text-align: center'> Unassigned GL</h1></div>";
                         glhtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th></tr></thead><tfoot><tr><th>GL Account</th></tr></tfoot><tbody>';
                         for (var i = 0; i < gls.length; i++) {
                             var gl = data[i];
@@ -199,7 +199,7 @@
                     //WBS validation population
                     var wbs = validation.wbs;
                     if (wbs.length > 0 ){
-                        var wbshtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        var wbshtml = "<div><h1 style='text-align: center'> Unassigned WBS </h1></div>";
                         wbshtml += '<table class="dispaly dataTable"> <thead><tr><th>WBS</th></tr></thead><tfoot><tr><th>WBS</th></tr></tfoot><tbody>';
                         for (var i = 0; i < wbs.length; i++) {
                             var wb = data[i];
@@ -215,7 +215,7 @@
                     // Assignment Validation poplation
                     var ass = validation.assignments;
                     if (ass.length > 0 ){
-                        var asshtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        var asshtml = "<div><h1 style='text-align: center'> No Assignment Exists </h1></div>";
                         asshtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th><th>WBS</th></tr></thead><tfoot><tr><th>GL Account</th><th>WBS</th></tr></tfoot><tbody>';
                         for (var i = 0; i < ass.length; i++) {
                             var as = data[i];
@@ -231,7 +231,7 @@
                     //Multiple gls validation population
                     var glm = validation.multiplegls;
                     if (glm.length > 0 ){
-                        var glmhtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        var glmhtml = "<div><h1 style='text-align: center'> Multiple GL Assignments in PCM </h1></div>";
                         glmhtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th><th>Assignment</th></tr></thead><tfoot><tr><th>GL Account</th><th>Assignment</th></tr></tfoot><tbody>';
                         for (var i = 0; i < glm.length; i++) {
                             var gm = data[i];
@@ -248,7 +248,7 @@
                     //Multiple wbs validation population
                     var wbsm = validation.multiplewbs;
                     if (wbsm.length > 0 ){
-                        var wbsmhtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        var wbsmhtml = "<div><h1 style='text-align: center'> Multiple WBS in PCM </h1></div>";
                         wbsmhtml += '<table class="dispaly dataTable"> <thead><tr><th>WBS</th><th>Assignment</th></tr></thead><tfoot><tr><th>WBS</th><th>Assignment</th></tr></tfoot><tbody>';
                         for (var i = 0; i < wbsm.length; i++) {
                             var wm = data[i];
