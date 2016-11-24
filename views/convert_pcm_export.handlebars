@@ -8,7 +8,7 @@
     <input type="text" class="form-control" id="period">
 </div>
 <p style="text-align: center">
-<button type="button" class="btn btn-info btn-lg">Export Cost Allocation</button>
+<button type="button" class="btn btn-info btn-lg" id="export">Export Cost Allocation</button>
 </p>
 
 <!--<div class="modal-backdrop fade in"  ></div>-->
@@ -32,3 +32,18 @@
 <div class="bs-docs-example" style="padding-bottom: 24px;">
     <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large" data-backdrop="static" >Launch demo modal</a>
 </div>
+
+
+<script>
+    $(function(){
+        $('#export').on('click', function (){
+          var period = $('#period').val();
+            if(!period){
+                swal("Period Missing","Enter Period for Allocation Extract","info")
+            } else {
+                // perform extract actions
+            }
+
+        })
+    });
+</script>
