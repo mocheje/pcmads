@@ -14,7 +14,7 @@
         <div class="qq-upload-button pull-right btn disabled hidden" id="loadButton">
             <div>Load To PCM</div>
         </div>
-        <div class="qq-upload-button pull-right btn disabled hidden" id="validateButton">
+        <div class="qq-upload-button pull-right btn disabled hidden" id="validateButton" data-toggle="modal" data-target="#myModal">
             <div>Validations</div>
         </div>
         <div class="qq-upload-button pull-right btn disabled hidden" id="exportButton">
@@ -73,6 +73,27 @@
 <!-- Trigger the modal with a button -->
 
 <div id="data">
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 <!-- Your code to create an instance of Fine Uploader and bind to the DOM/template
 ====================================================================== -->
@@ -142,7 +163,7 @@
                 $("#exportButton").removeClass('disabled hidden');
                 $("#validateButton").removeClass('disabled hidden');
                 $("#validateButton").on('click', function () {
-                    console.log("Validation Clicked");
+                    $("#MyModal").modal();
                 });
                 $("#loadButton").on('click', function () {
                     swal({
