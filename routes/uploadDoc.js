@@ -68,9 +68,8 @@ router.post('/', function(req, res, next) {
                     validations.assignments = [];
                     validations.multipleassignments = [];
                     var reformattedResponse = response.map(function(obj){
-                        obj.wbs = obj['GL ACCOUNT'].split("-")[0].replace(/\s+/g, '');
-                        obj.gl = obj['SENDER WBS'].split("-")[0].replace(/\s+/g, '');
-                        console.log(obj);
+                        obj.gl = obj['GL ACCOUNT'].split("-")[0].replace(/\s+/g, '');
+                        obj.wbs = obj['SENDER WBS'].split("-")[0].replace(/\s+/g, '');
                         return obj;
                     });
                     for(var i = 0; i<glwbs.length; i++){
