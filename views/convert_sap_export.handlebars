@@ -183,10 +183,10 @@
                     //GL validation population
                     var gls = validation.gls;
                     if (gls.length > 0 ){
-                        var glhtml = "<div><h1 style='text-align: center'> Unassigned GL</h1></div>";
+                        var glhtml = "<div><h1 style='text-align: center; border-bottom: 1px solid #ccc'> Unassigned GLS </h1></div>";
                         glhtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th></tr></thead><tfoot><tr><th>GL Account</th></tr></tfoot><tbody>';
                         for (var i = 0; i < gls.length; i++) {
-                            var gl = data[i];
+                            var gl = gls[i];
                             glhtml += "<tr>";
                             glhtml += "<td>" + gl + "</td>";
                             glhtml += "</tr>";
@@ -202,9 +202,9 @@
                         var wbshtml = "<div><h1 style='text-align: center'> Unassigned WBS </h1></div>";
                         wbshtml += '<table class="dispaly dataTable"> <thead><tr><th>WBS</th></tr></thead><tfoot><tr><th>WBS</th></tr></tfoot><tbody>';
                         for (var i = 0; i < wbs.length; i++) {
-                            var wb = data[i];
+                            var wb = wbs[i];
                             wbshtml += "<tr>";
-                            wbshtml += "<td>" + gl + "</td>";
+                            wbshtml += "<td>" + wb + "</td>";
                             wbshtml += "</tr>";
 
                         }
@@ -218,7 +218,7 @@
                         var asshtml = "<div><h1 style='text-align: center'> No Assignment Exists </h1></div>";
                         asshtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th><th>WBS</th></tr></thead><tfoot><tr><th>GL Account</th><th>WBS</th></tr></tfoot><tbody>';
                         for (var i = 0; i < ass.length; i++) {
-                            var as = data[i];
+                            var as = ass[i];
                             asshtml += "<tr>";
                             asshtml += "<td>" + as.gl + "</td>" + "<td>" + as.wbs + "</td>";
                             asshtml += "</tr>";
@@ -234,7 +234,7 @@
                         var glmhtml = "<div><h1 style='text-align: center'> Multiple GL Assignments in PCM </h1></div>";
                         glmhtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th><th>Assignment</th></tr></thead><tfoot><tr><th>GL Account</th><th>Assignment</th></tr></tfoot><tbody>';
                         for (var i = 0; i < glm.length; i++) {
-                            var gm = data[i];
+                            var gm = glm[i];
                             for (var j = 0; j<gm.length; j++ ){
                                 glmhtml += "<tr>";
                                 glmhtml += "<td>" + gm[j].gl + "</td>" + "<td>" + gm[j].NAME + "</td>";
@@ -251,7 +251,7 @@
                         var wbsmhtml = "<div><h1 style='text-align: center'> Multiple WBS in PCM </h1></div>";
                         wbsmhtml += '<table class="dispaly dataTable"> <thead><tr><th>WBS</th><th>Assignment</th></tr></thead><tfoot><tr><th>WBS</th><th>Assignment</th></tr></tfoot><tbody>';
                         for (var i = 0; i < wbsm.length; i++) {
-                            var wm = data[i];
+                            var wm = wbsm[i];
                             for (var j = 0; j<wm.length; j++ ){
                                 wbsmhtml += "<tr>";
                                 wbsmhtml += "<td>" + wm[j].wbs + "</td>" + "<td>" + wm[j].NAME + "</td>";
