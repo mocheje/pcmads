@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b35c4c7a-61ca-4650-9ff4-2d8ddd2837ab" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/Site.css" afterPath="$PROJECT_DIR$/public/stylesheets/Site.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/convert_pcm_export.handlebars" afterPath="$PROJECT_DIR$/views/convert_pcm_export.handlebars" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/convert_sap_export.handlebars" afterPath="$PROJECT_DIR$/views/convert_sap_export.handlebars" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/sidebar.handlebars" afterPath="$PROJECT_DIR$/views/partials/sidebar.handlebars" />
     </list>
     <ignored path="pcmads.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,9 +27,27 @@
       <file leaf-file-name="convert_sap_export.handlebars" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/convert_sap_export.handlebars">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="181" column="64" selection-start-line="181" selection-start-column="64" selection-end-line="181" selection-end-column="64" />
-              <folding />
+            <state relative-caret-position="200">
+              <caret line="315" column="77" selection-start-line="315" selection-start-column="77" selection-end-line="315" selection-end-column="77" />
+              <folding>
+                <marker date="1479966097329" expanded="true" signature="9797:9815" placeholder="..." />
+                <marker date="1479966097329" expanded="true" signature="10625:10643" placeholder="..." />
+                <marker date="1479966097329" expanded="true" signature="11461:11479" placeholder="..." />
+                <marker date="1479966097329" expanded="true" signature="12368:12386" placeholder="..." />
+                <marker date="1479966097329" expanded="true" signature="13406:13424" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pcm.handlebars" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/pcm.handlebars">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="416">
+              <caret line="55" column="56" selection-start-line="43" selection-start-column="16" selection-end-line="55" selection-end-column="56" />
+              <folding>
+                <marker date="1479959119371" expanded="true" signature="1712:1730" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -352,12 +366,12 @@
       <workItem from="1479502465057" duration="8864000" />
       <workItem from="1479630233610" duration="6733000" />
       <workItem from="1479761339779" duration="46496000" />
-      <workItem from="1479864829682" duration="66839000" />
+      <workItem from="1479864829682" duration="69832000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189412000" />
+    <option name="totallyTimeSpent" value="192405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -815,17 +829,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/pcm.handlebars">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="5" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <marker date="1479959119371" expanded="true" signature="1712:1730" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/Site.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="518">
@@ -834,11 +837,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/pcm.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="55" column="56" selection-start-line="43" selection-start-column="16" selection-end-line="55" selection-end-column="56" />
+          <folding>
+            <marker date="1479959119371" expanded="true" signature="1712:1730" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/convert_sap_export.handlebars">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="181" column="64" selection-start-line="181" selection-start-column="64" selection-end-line="181" selection-end-column="64" />
-          <folding />
+        <state relative-caret-position="200">
+          <caret line="315" column="77" selection-start-line="315" selection-start-column="77" selection-end-line="315" selection-end-column="77" />
+          <folding>
+            <marker date="1479966097329" expanded="true" signature="9797:9815" placeholder="..." />
+            <marker date="1479966097329" expanded="true" signature="10625:10643" placeholder="..." />
+            <marker date="1479966097329" expanded="true" signature="11461:11479" placeholder="..." />
+            <marker date="1479966097329" expanded="true" signature="12368:12386" placeholder="..." />
+            <marker date="1479966097329" expanded="true" signature="13406:13424" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

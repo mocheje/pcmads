@@ -86,39 +86,39 @@
                 <h4 class="modal-title">Data Validations</h4>
             </div>
             <div class="modal-body">
-                    <h4>PCM Objects and SAP Data Validations</h4>
-                    <p>Please remove every affected line from the main upload using the checkbox, or correct the data and reupload before loading the data to PCM if there are validation Errors.</p>
+                <h4>PCM Objects and SAP Data Validations</h4>
+                <p>Please remove every affected line from the main upload using the checkbox, or correct the data and reupload before loading the data to PCM if there are validation Errors.</p>
 
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#glValidation">Unknown GLs</a></li>
-                        <li><a data-toggle="tab" href="#wbsValidation">Unknown Wbs</a></li>
-                        <li><a data-toggle="tab" href="#assValidation">Unknown Combination</a></li>
-                        <li><a data-toggle="tab" href="#glMulValidation">Multiple Gls PCM</a></li>
-                        <li><a data-toggle="tab" href="#wbsMulValidation">Multiple WBS PCM</a></li>
-                    </ul>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#glValidation">Unknown GLs</a></li>
+                    <li><a data-toggle="tab" href="#wbsValidation">Unknown Wbs</a></li>
+                    <li><a data-toggle="tab" href="#assValidation">Unknown Combination</a></li>
+                    <li><a data-toggle="tab" href="#glMulValidation">Multiple Gls PCM</a></li>
+                    <li><a data-toggle="tab" href="#wbsMulValidation">Multiple WBS PCM</a></li>
+                </ul>
 
-                    <div class="tab-content">
-                        <div id="glValidation" class="tab-pane fade in active">
-                            <h3>NONE</h3>
-                            <p>All Uploaded GLS are known in PCM.</p>
-                        </div>
-                        <div id="wbsValidation" class="tab-pane fade">
-                            <h3>NONE</h3>
-                            <p>All Sender WBS are known in PCM.</p>
-                        </div>
-                        <div id="assValidation" class="tab-pane fade">
-                            <h3>NONE</h3>
-                            <p>All Gls and WBS are assigned in PCM</p>
-                        </div>
-                        <div id="glMulValidation" class="tab-pane fade">
-                            <h3>NONE</h3>
-                            <p>No multiple GL assignment found in PCM</p>
-                        </div>
-                        <div id="wbsMulValidation" class="tab-pane fade">
-                            <h3>NONE</h3>
-                            <p>No multiple WBS assignment found in PCM</p>
-                        </div>
+                <div class="tab-content">
+                    <div id="glValidation" class="tab-pane fade in active">
+                        <h3>NONE</h3>
+                        <p>All Uploaded GLS are known in PCM.</p>
                     </div>
+                    <div id="wbsValidation" class="tab-pane fade">
+                        <h3>NONE</h3>
+                        <p>All Sender WBS are known in PCM.</p>
+                    </div>
+                    <div id="assValidation" class="tab-pane fade">
+                        <h3>NONE</h3>
+                        <p>All Gls and WBS are assigned in PCM</p>
+                    </div>
+                    <div id="glMulValidation" class="tab-pane fade">
+                        <h3>NONE</h3>
+                        <p>No multiple GL assignment found in PCM</p>
+                    </div>
+                    <div id="wbsMulValidation" class="tab-pane fade">
+                        <h3>NONE</h3>
+                        <p>No multiple WBS assignment found in PCM</p>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -154,7 +154,7 @@
                 swal("Processing Complete!", "File Uploaded and validation complete", "success");
                 if (responseJSON.success) {
                     var html = "";
-                    html += '<table id="uploaded" class="display" cellspacing="0"><thead><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></thead><tfoot><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></tfoot><tbody>';
+                    html += '<table id="uploaded" class="display dataTable" cellspacing="0"><thead><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></thead><tfoot><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></tfoot><tbody>';
                     data = responseJSON.data;
                     validation = responseJSON.validations;
                     period = responseJSON.period;
@@ -178,72 +178,155 @@
 
                     html += '</tbody></table>';
                     $('#data').append(html);
-                }
-                //populate validation tabs with validation data.
-                $(".remove").change(function() {
-                    if(this.checked) {
-                        //push to remove array
-                        remove.push($(this).closest('tr').attr('id'));
-                        //strike through a tr line
-                        $(this).closest("tr").addClass('strike');
-                    } else {
-                        remove.splice(remove.indexOf($(this).closest('tr').attr('id')),1);
-                        $(this).closest("tr").removeClass('strike');
-                    }
-                    console.log(remove);
-                });
-                $("#loadButton").removeClass('disabled hidden');
-                $("#exportButton").removeClass('disabled hidden');
-                $("#validateButton").removeClass('disabled hidden');
-                $("#validateButton").on('click', function () {
-                    $("#myModal").appendTo("body").modal('show');
-                });
-                $("#loadButton").on('click', function () {
-                    swal({
-                                title: "Load to PCM",
-                                text: "Submit to Load data into PCM Bridge",
-                                type: "info",
-                                showCancelButton: true,
-                                closeOnConfirm: false,
-                                showLoaderOnConfirm: true,
-                            },
-                            function(){
-                                //remove all elements from data that has been highlighted in remove array
-                                var newdata = data;
-                                for(var i = 0; i < remove.length; i++){
-                                    newdata.splice(data[remove[i]], 1);
-                                }
-                                //load data via ajax.
-                                // /server/dataload
-                                $.ajax({
-                                    url: '/server/dataload'
-                                    , type: 'POST'
-                                    , contentType: 'application/json'
-                                    , dataType: 'json'
-                                    , data: JSON.stringify({"data": newdata, "period": period})
-                                    , success: done.bind(this)
-                                    , error: fail.bind(this)
-//, processData: false //Doesn't help
-                                });
-                                function done(response){
-                                    console.log(response);
-                                    swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + newdata.length + " !", "" ,"success");
-                                }
-                                function fail(err){
-                                    console.log(err);
-                                    swal("Failed to laod data " + newdata.length + " !", "" ,"error");
-                                }
-                            });
-                });
-                var table = $('#uploaded').DataTable();
 
-                $('#exportButton').on('click', function(){
-                    $('<table>').append(table.$('tr').clone()).table2excel({
-                        exclude: ".excludeThisClass",
-                        name: "Worksheet Name",
-                        filename: "exported" + responseJSON.period //do not include extension
+                    //populate validation tabs with validation data.
+                    //GL validation population
+                    var gls = validation.gls;
+                    if (gls.length > 0 ){
+                        var glhtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        glhtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th></tr></thead><tfoot><tr><th>GL Account</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < gls.length; i++) {
+                            var gl = data[i];
+                            glhtml += "<tr>";
+                            glhtml += "<td>" + gl + "</td>";
+                            glhtml += "</tr>";
+
+                        }
+                        glhtml += '</tbody></table>';
+                        $('#glValidation').html(glhtml);
+                    }
+
+                    //WBS validation population
+                    var wbs = validation.wbs;
+                    if (wbs.length > 0 ){
+                        var wbshtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        wbshtml += '<table class="dispaly dataTable"> <thead><tr><th>WBS</th></tr></thead><tfoot><tr><th>WBS</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < wbs.length; i++) {
+                            var wb = data[i];
+                            wbshtml += "<tr>";
+                            wbshtml += "<td>" + gl + "</td>";
+                            wbshtml += "</tr>";
+
+                        }
+                        wbshtml += '</tbody></table>';
+                        $('#wbsValidation').html(wbshtml);
+                    }
+
+                    // Assignment Validation poplation
+                    var ass = validation.assignments;
+                    if (ass.length > 0 ){
+                        var asshtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        asshtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th><th>WBS</th></tr></thead><tfoot><tr><th>GL Account</th><th>WBS</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < ass.length; i++) {
+                            var as = data[i];
+                            asshtml += "<tr>";
+                            asshtml += "<td>" + as.gl + "</td>" + "<td>" + as.wbs + "</td>";
+                            asshtml += "</tr>";
+
+                        }
+                        asshtml += '</tbody></table>';
+                        $('#assValidation').html(asshtml);
+                    }
+
+                    //Multiple gls validation population
+                    var glm = validation.multiplegls;
+                    if (glm.length > 0 ){
+                        var glmhtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        glmhtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th><th>Assignment</th></tr></thead><tfoot><tr><th>GL Account</th><th>Assignment</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < glm.length; i++) {
+                            var gm = data[i];
+                            for (var j = 0; j<gm.length; j++ ){
+                                glmhtml += "<tr>";
+                                glmhtml += "<td>" + gm[j].gl + "</td>" + "<td>" + gm[j].NAME + "</td>";
+                                glmhtml += "</tr>";
+                            }
+                        }
+                        glmhtml += '</tbody></table>';
+                        $('#glMulValidation').html(glmhtml);
+                    }
+
+                    //Multiple wbs validation population
+                    var wbsm = validation.multiplewbs;
+                    if (wbsm.length > 0 ){
+                        var wbsmhtml = "<div><h1 style='text-align: center'>" + title  + "</h1></div>";
+                        wbsmhtml += '<table class="dispaly dataTable"> <thead><tr><th>WBS</th><th>Assignment</th></tr></thead><tfoot><tr><th>WBS</th><th>Assignment</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < wbsm.length; i++) {
+                            var wm = data[i];
+                            for (var j = 0; j<wm.length; j++ ){
+                                wbsmhtml += "<tr>";
+                                wbsmhtml += "<td>" + wm[j].wbs + "</td>" + "<td>" + wm[j].NAME + "</td>";
+                                wbsmhtml += "</tr>";
+                            }
+                        }
+                        wbsmhtml += '</tbody></table>';
+                        $('#wbsMulValidation').html(wbsmhtml);
+                    }
+
+                    $(".remove").change(function() {
+                        if(this.checked) {
+                            //push to remove array
+                            remove.push($(this).closest('tr').attr('id'));
+                            //strike through a tr line
+                            $(this).closest("tr").addClass('strike');
+                        } else {
+                            remove.splice(remove.indexOf($(this).closest('tr').attr('id')),1);
+                            $(this).closest("tr").removeClass('strike');
+                        }
+                        console.log(remove);
                     });
-                });
+                    $("#loadButton").removeClass('disabled hidden');
+                    $("#exportButton").removeClass('disabled hidden');
+                    $("#validateButton").removeClass('disabled hidden');
+                    $("#validateButton").on('click', function () {
+                        $("#myModal").appendTo("body").modal('show');
+                    });
+                    $("#loadButton").on('click', function () {
+                        swal({
+                                    title: "Load to PCM",
+                                    text: "Submit to Load data into PCM Bridge",
+                                    type: "info",
+                                    showCancelButton: true,
+                                    closeOnConfirm: false,
+                                    showLoaderOnConfirm: true,
+                                },
+                                function(){
+                                    //remove all elements from data that has been highlighted in remove array
+                                    var newdata = data;
+                                    for(var i = 0; i < remove.length; i++){
+                                        newdata.splice(data[remove[i]], 1);
+                                    }
+                                    //load data via ajax.
+                                    // /server/dataload
+                                    $.ajax({
+                                        url: '/server/dataload'
+                                        , type: 'POST'
+                                        , contentType: 'application/json'
+                                        , dataType: 'json'
+                                        , data: JSON.stringify({"data": newdata, "period": period})
+                                        , success: done.bind(this)
+                                        , error: fail.bind(this)
+//, processData: false //Doesn't help
+                                    });
+                                    function done(response){
+                                        console.log(response);
+                                        swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + newdata.length + " !", "" ,"success");
+                                    }
+                                    function fail(err){
+                                        console.log(err);
+                                        swal("Failed to laod data " + newdata.length + " !", "" ,"error");
+                                    }
+                                });
+                    });
+                    var table = $('.dataTable').DataTable();
+
+                    $('#exportButton').on('click', function(){
+                        $('<table>').append(table.$('tr').clone()).table2excel({
+                            exclude: ".excludeThisClass",
+                            name: "Worksheet Name",
+                            filename: "exported" + responseJSON.period //do not include extension
+                        });
+                    });
+                }
             }
         }
     });
