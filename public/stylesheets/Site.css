@@ -308,3 +308,6 @@ div.accountInfo
 .dataTables_wrapper {
     overflow: scroll;
 }
+.qq-upload-button {
+    margin-right: 3px;
+}

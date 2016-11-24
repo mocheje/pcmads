@@ -14,7 +14,7 @@
         <div class="qq-upload-button pull-right btn disabled hidden" id="loadButton">
             <div>Load To PCM</div>
         </div>
-        <div class="qq-upload-button pull-right btn disabled hidden" id="validateButton" data-toggle="modal" data-target="#myModal">
+        <div class="qq-upload-button pull-right btn disabled hidden" id="validateButton">
             <div>Validations</div>
         </div>
         <div class="qq-upload-button pull-right btn disabled hidden" id="exportButton">
@@ -83,10 +83,42 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Data Validations</h4>
             </div>
             <div class="modal-body">
-                <p>Some text in the modal.</p>
+                    <h4>PCM Objects and SAP Data Validations</h4>
+                    <p>Please remove every affected line from the main upload using the checkbox, or correct the data and reupload before loading the data to PCM if there are validation Errors.</p>
+
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#glValidation">Unknown GLs</a></li>
+                        <li><a data-toggle="tab" href="#wbsValidation">Unknown Wbs</a></li>
+                        <li><a data-toggle="tab" href="#assValidation">Unknown Combination</a></li>
+                        <li><a data-toggle="tab" href="#glMulValidation">Multiple Gls PCM</a></li>
+                        <li><a data-toggle="tab" href="#wbsMulValidation">Multiple WBS PCM</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="glValidation" class="tab-pane fade in active">
+                            <h3>NONE</h3>
+                            <p>All Uploaded GLS are known in PCM.</p>
+                        </div>
+                        <div id="wbsValidation" class="tab-pane fade">
+                            <h3>NONE</h3>
+                            <p>All Sender WBS are known in PCM.</p>
+                        </div>
+                        <div id="assValidation" class="tab-pane fade">
+                            <h3>NONE</h3>
+                            <p>All Gls and WBS are assigned in PCM</p>
+                        </div>
+                        <div id="glMulValidation" class="tab-pane fade">
+                            <h3>NONE</h3>
+                            <p>No multiple GL assignment found in PCM</p>
+                        </div>
+                        <div id="wbsMulValidation" class="tab-pane fade">
+                            <h3>NONE</h3>
+                            <p>No multiple WBS assignment found in PCM</p>
+                        </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -147,6 +179,7 @@
                     html += '</tbody></table>';
                     $('#data').append(html);
                 }
+                //populate validation tabs with validation data.
                 $(".remove").change(function() {
                     if(this.checked) {
                         //push to remove array
@@ -163,7 +196,7 @@
                 $("#exportButton").removeClass('disabled hidden');
                 $("#validateButton").removeClass('disabled hidden');
                 $("#validateButton").on('click', function () {
-                    $("#MyModal").modal();
+                    $("#myModal").appendTo("body").modal('show');
                 });
                 $("#loadButton").on('click', function () {
                     swal({
