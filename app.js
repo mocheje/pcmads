@@ -90,6 +90,29 @@ app.use(function(err, req, res, next) {
 //Initialize Sql scripts will return error if view already exists
 sql.connect(credentials).then(function() {
     fs.readdir(scriptFolder, function(err, files){
+        //drop all views and recreate them
+        var dropQuery = "";
+
+        files.forEach(function(file){
+            dropQuery = "DROP VIEW [dbo].[" + file + "];"
+        });
+        try{
+            new sql.Request().query(dropQuery)
+                .then(function(recordset) {
+                    //expect to receive undefined if all goeas well
+                    if(recordset == undefined){
+                        console.log(file + " Dropping all previous views");
+                    } else {
+                        console.log(recordset);
+                    }
+                }).catch(function(err) {
+                // ... query error checks
+                console.log("Initialization objects alrady exist");
+                // logger.log(err);
+            });
+        } catch(e){
+            console.log(e);
+        }
         files.forEach(function(file){
             fs.readFile(scriptFolder + file, "utf-8", function(err, data) {
                 //replace all @MODELID with modelId
