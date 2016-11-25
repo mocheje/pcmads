@@ -53,7 +53,9 @@ router.post('/', function(req, res, next) {
                         char = ";";
                     }
                     var gl = data[i][3], wbs = data[i][5], currency = data[i][10], value = data[i][9];
-                    values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
+                    if(gl && wbs && currency && value){
+                        values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;7
+                    }
                 }
                 var query = "TRUNCATE TABLE [PCM].[dbo].[PCMADS_BRIDGE]; INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
                 new sql.Request().query(query)
