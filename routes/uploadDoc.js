@@ -9,7 +9,6 @@ var _ = require('underscore');
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
-    console.log(req.files);
     var Month = {
         'JAN': '001',
         'FEB': '002',
@@ -62,7 +61,7 @@ router.post('/', function(req, res, next) {
             if(!glwbsflags[data[i][5] + data[i][3]]){ //get unique gls and wbs
                 glwbsflags[data[i][5] + data[i][3]] = true;
                 if(data[i][5] + data[i][3])
-                    glwbs.push({wbs: data[i][5], gl: data[i][3]});
+                    glwbs.push({wbs: data[i][5], gl: data[i][3].toString()});
             }
 
         }
