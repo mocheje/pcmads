@@ -56,7 +56,7 @@ router.post('/', function(req, res, next) {
                 gls.push(data[i][3]);
             } else if(!glwbsflags[data[i][5] + data[i][3]]){ //get unique gls and wbs
                 glwbsflags[data[i][5] + data[i][3]] = true;
-                glwbs.push({wbs: data[i][5], gl: data[i][3].toString()});
+                glwbs.push({wbs: data[i][5], gl: data[i][3]? data[i[3]].toString(): '' });
             }
 
         }
