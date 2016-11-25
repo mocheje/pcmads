@@ -31,13 +31,11 @@ router.post('/', function(req, res, next) {
         new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_LINEITEM]')
             .then(function(recordset) {
                 for(var i = 0; i< data.length; i++){
-                    console.log(data[i][3]);
                     for(var j=0;j<recordset.length;j++){
-                        if(data[i][3] == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
+                        if(data[i][3].toString() == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[i][3] = recordset[j].NAME;
                             break;
                         }
-                        console.log(data[i][3]);
                     }
                 }
                 inform();
@@ -52,15 +50,19 @@ router.post('/', function(req, res, next) {
                     if(i == data.length - 1){
                         char = ";";
                     }
-                    var gl = data[i][3], wbs = data[i][5], currency = data[i][10], value = data[i][9];
-                    if(gl && wbs && currency && value){
-                        values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;7
-                    }
+                    var gl = data[i][3], wbs = data[i][5], currency = data[i][10] | "NGN", value = data[i][9];
+                    //null items should not go into pcm
+                    values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
                 }
                 var query = "TRUNCATE TABLE [PCM].[dbo].[PCMADS_BRIDGE]; INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
+                console.log(query);
                 new sql.Request().query(query)
                     .then(function(recordset) {
                         res.json({success: true});
+                    })
+                    .catch(function(err){
+                        console.log(err);
+                        res.json({success: false, error: err});
                     })
             }
         };
@@ -68,6 +70,7 @@ router.post('/', function(req, res, next) {
     }).catch(function(err) {
         // ... connect error checks
         console.log(err);
+        res.json({success: false})
     });
 });
 

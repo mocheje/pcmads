@@ -312,7 +312,11 @@
                                     });
                                     function done(response){
                                         console.log(response);
-                                        swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + newdata.length + " !", "" ,"success");
+                                        if(response.success){
+                                            swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + newdata.length + " !", "" ,"success");
+                                        } else {
+                                            swal("Failed to laod data " + response.error.message + " !", "" ,"error");
+                                        }
                                     }
                                     function fail(err){
                                         console.log(err);
