@@ -9,6 +9,7 @@ var _ = require('underscore');
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
+    console.log(req.files);
     var Month = {
         'JAN': '001',
         'FEB': '002',
@@ -50,19 +51,25 @@ router.post('/', function(req, res, next) {
             //get unigue wbs
             if(!wbsflags[data[i][5]]) { //get unique wbs
                 wbsflags[data[i][5]] = true;
-                wbs.push(data[i][5]);
-            } else if(!glflags[data[i][3]]){ //get unique gls
+                if(data[i][5])
+                    wbs.push(data[i][5]);
+            }
+            if(!glflags[data[i][3]]){ //get unique gls
                 glflags[data[i][3]] = true;
-                gls.push(data[i][3]);
-            } else if(!glwbsflags[data[i][5] + data[i][3]]){ //get unique gls and wbs
+                if(data[i][3])
+                    gls.push(data[i][3]);
+            }
+            if(!glwbsflags[data[i][5] + data[i][3]]){ //get unique gls and wbs
                 glwbsflags[data[i][5] + data[i][3]] = true;
-                glwbs.push({wbs: data[i][5], gl: data[i][3]? data[i[3]].toString(): '' });
+                if(data[i][5] + data[i][3])
+                    glwbs.push({wbs: data[i][5], gl: data[i][3]});
             }
 
         }
     } catch (e){
         console.log(e);
     }
+
 
     console.log("will connect to sql now");
     //get objects and compare with uploaded data
