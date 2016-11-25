@@ -1,0 +1,45 @@
+<div>
+    <h2 style="text-align: center">Data Loaded in PCM Bridge</h2>
+</div>
+<table id="pcmbridge" class="display">
+
+    <thead>
+    <tr>
+        <th>VersionName</th>
+        <th>PeriodName</th>
+        <th>RespCenterName</th>
+        <th>LineItemName</th>
+        <th>CurrencyName</th>
+        <th>LineItemValue</th>
+    </tr>
+
+    </thead>
+
+    <tfoot>
+    <tr>
+        <th>VersionName</th>
+        <th>PeriodName</th>
+        <th>RespCenterName</th>
+        <th>LineItemName</th>
+        <th>CurrencyName</th>
+        <th>LineItemValue</th>
+    </tr>
+    </tfoot>
+
+    <tbody>
+    {{#each bridge}}
+        <tr>
+            <td>{{VersionName}}</td>
+            <td>{{PeriodName}}</td>
+            <td>{{RespCenterName}}</td>
+            <td>{{LineItemName}}</td>
+            <td>{{CurrencyName}}</td>
+            <td>{{LineItemValue}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
+
+<script>
+    var table = $('#pcmbridge').DataTable();
+</script>

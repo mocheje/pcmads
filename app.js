@@ -23,6 +23,7 @@ var users = require('./routes/users');
 var uploadDoc = require('./routes/uploadDoc');
 var dataLoad = require('./routes/dataLoad');
 var assignments = require('./routes/assignments');
+var pcmbridge = require('./routes/pcmbridge');
 var pcm = require('./routes/pcm');
 var scriptFolder = './script/';
 
@@ -66,6 +67,7 @@ app.use('/convert_pcm_export', isAuthenticated, convert_pcm_export);
 app.use('/server/uploads', isAuthenticated, uploadDoc);
 app.use('/server/dataload', isAuthenticated, dataLoad);
 app.use('/assignments', isAuthenticated, assignments);
+app.use('/pcmbridge', isAuthenticated, pcmbridge);
 app.use('/', isAuthenticated, pcm);
 
 

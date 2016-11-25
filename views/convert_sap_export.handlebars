@@ -152,8 +152,8 @@
         callbacks: {
             onComplete: function (id, fileName, responseJSON) {
                 //alert("Success: " + responseJSON.success);
-                swal("Processing Complete!", "File Uploaded and validation complete", "success");
                 if (responseJSON.success) {
+                    swal("Processing Complete!", "File Uploaded and validation complete", "success");
                     var html = "";
                     html += '<table id="uploaded" class="display dataTable" cellspacing="0"><thead><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></thead><tfoot><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></tfoot><tbody>';
                     data = responseJSON.data;
@@ -329,6 +329,8 @@
                             filename: "exported" + responseJSON.period //do not include extension
                         });
                     });
+                } else {
+                    swal("error", "Unable to process file", "error");
                 }
             }
         }

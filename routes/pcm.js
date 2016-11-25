@@ -68,6 +68,17 @@ router.get('/pcm/uapcodes', function(req, res, next) {
 
 });
 
+router.get('/pcm/bridge', function(req, res, next) {
+    pcmQuery.getBridge(function(err, response){
+        if(response){
+            res.json({success: true, data: response});
+        } else {
+            res.json({error: true, message: err});
+        }
+    });
+
+});
+
 router.get('/pcm', function(req, res, next) {
     res.render('pcm');
 });

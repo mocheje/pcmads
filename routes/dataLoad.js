@@ -31,11 +31,13 @@ router.post('/', function(req, res, next) {
         new sql.Request().query('SELECT [NAME] FROM [PCM].[dbo].[PCMADS_LINEITEM]')
             .then(function(recordset) {
                 for(var i = 0; i< data.length; i++){
+                    console.log(data[i][3]);
                     for(var j=0;j<recordset.length;j++){
                         if(data[i][3] == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
                             data[i][3] = recordset[j].NAME;
                             break;
                         }
+                        console.log(data[i][3]);
                     }
                 }
                 inform();

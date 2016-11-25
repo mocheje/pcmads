@@ -19,6 +19,22 @@ module.exports = {
             callback(err);
         });
     },
+    getBridge: function(callback){
+        console.log(credentials);
+        sql.connect(credentials).then(function() {
+            // Query
+            new sql.Request().query('SELECT * FROM [PCM].[dbo].[PCMADS_BRIDGE]')
+                .then(function(recordset) {
+                    callback(null, recordset);
+                }).catch(function(err) {
+                // ... query error checks
+                callback(err);
+            });
+        }).catch(function(err) {
+            // ... connect error checks
+            callback(err);
+        });
+    },
     getGls: function(callback){
         sql.connect(credentials).then(function() {
             // Query
