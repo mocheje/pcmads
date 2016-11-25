@@ -34,6 +34,9 @@ jspm_packages
 # ignore .idea files
 .idea
 
+# ignore uploads
+uploads
+
 # Optional REPL history
 .node_repl_history
 

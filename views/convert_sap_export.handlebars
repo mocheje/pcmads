@@ -33,6 +33,7 @@
                 <img class="qq-thumbnail-selector" qq-max-size="100" qq-server-scale>
                 <span class="qq-upload-file-selector qq-upload-file"></span>
                 <span class="qq-upload-size-selector qq-upload-size"></span>
+                <span class="qq-upload-size-selector qq-upload-period"></span>
                 <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
                 <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
                 <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
@@ -158,6 +159,8 @@
                     data = responseJSON.data;
                     validation = responseJSON.validations;
                     period = responseJSON.period;
+                    //set period name
+                    $('.qq-upload-period').html('Period: ' + period + ' NOTE* Correct file name if incorrect');
                     data.splice(0,7);  //remove headers
                     for (var i = 0; i < data.length; i++) {
                         var item = data[i];

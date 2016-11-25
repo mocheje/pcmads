@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({limit: '5mb'}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(multer({ dest: 'c:/sap_app/uploads/'}).any());
+app.use(multer({ dest: './uploads/'}).any());
 
 app.use('/', index);
 app.use('/users', isAuthenticated, users);

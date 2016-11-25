@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
     };
     try{
         var obj = xlsx.parse(fs.readFileSync(req.files[0].path));
-        filename = obj[0].name;
+        filename = req.files[0].originalname;
         // GET PERIOD FROM FILENAME
         var splname = filename.split(' ');
         var period = splname[1] + Month[splname[0]];
