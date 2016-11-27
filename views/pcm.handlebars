@@ -53,7 +53,12 @@
                 }
                 html += '</tbody></table>';
                 $(targ).html(html);
-                var table = $('.dataTable').DataTable();
+                var table = $('.dataTable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
             }
         });
         $this.tab('show');

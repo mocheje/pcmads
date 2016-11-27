@@ -324,7 +324,12 @@
                                     }
                                 });
                     });
-                    var table = $('.dataTable').DataTable();
+                    var table = $('.dataTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
 
                     $('#exportButton').on('click', function(){
                         $('<table>').append(table.$('tr').clone()).table2excel({

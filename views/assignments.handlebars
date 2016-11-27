@@ -42,5 +42,10 @@
 </table>
 
 <script>
-    var table = $('#assignment').DataTable();
+    var table = $('#assignment').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
 </script>
