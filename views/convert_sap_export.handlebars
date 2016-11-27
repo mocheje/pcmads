@@ -280,53 +280,46 @@
                         $("#myModal").appendTo("body").modal('show');
                     });
                     $("#loadButton").on('click', function () {
-                        //check if period is valid
-                        var reg = new RegExp('^[0-9]+$');
-                        if(!reg.test(period)){
-                            swal("Failed to laod data !", "Period is invalid","error");
-                            return false;
-                        } else {
-                            swal({
-                                        title: "Load to PCM",
-                                        text: "Submit to Load data into PCM Bridge",
-                                        type: "info",
-                                        showCancelButton: true,
-                                        closeOnConfirm: false,
-                                        showLoaderOnConfirm: true,
-                                    },
-                                    function () {
-                                        //remove all elements from data that has been highlighted in remove array
-                                        var newdata = data;
-                                        for (var i = 0; i < remove.length; i++) {
-                                            newdata.splice(data[remove[i]], 1);
-                                        }
-                                        //load data via ajax.
-                                        // /server/dataload
-                                        $.ajax({
-                                            url: '/server/dataload'
-                                            , type: 'POST'
-                                            , contentType: 'application/json'
-                                            , dataType: 'json'
-                                            , data: JSON.stringify({"data": newdata, "period": period})
-                                            , success: done.bind(this)
-                                            , error: fail.bind(this)
+                        swal({
+                                    title: "Load to PCM",
+                                    text: "Submit to Load data into PCM Bridge",
+                                    type: "info",
+                                    showCancelButton: true,
+                                    closeOnConfirm: false,
+                                    showLoaderOnConfirm: true,
+                                },
+                                function () {
+                                    //remove all elements from data that has been highlighted in remove array
+                                    var newdata = data;
+                                    for (var i = 0; i < remove.length; i++) {
+                                        newdata.splice(data[remove[i]], 1);
+                                    }
+                                    //load data via ajax.
+                                    // /server/dataload
+                                    $.ajax({
+                                        url: '/server/dataload'
+                                        , type: 'POST'
+                                        , contentType: 'application/json'
+                                        , dataType: 'json'
+                                        , data: JSON.stringify({"data": newdata, "period": period})
+                                        , success: done.bind(this)
+                                        , error: fail.bind(this)
 //, processData: false //Doesn't help
-                                        });
-                                        function done(response) {
-                                            console.log(response);
-                                            if (response.success) {
-                                                swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + newdata.length + " !", "", "success");
-                                            } else {
-                                                swal("Failed to laod data " + response.error.message + " !", "", "error");
-                                            }
-                                        }
-
-                                        function fail(err) {
-                                            console.log(err);
-                                            swal("Failed to laod data " + newdata.length + " !", "", "error");
-                                        }
                                     });
-                        }
+                                    function done(response) {
+                                        console.log(response);
+                                        if (response.success) {
+                                            swal("Previous data removed and new Data loaded into PCM Bridge Successfully Count" + newdata.length + " !", "", "success");
+                                        } else {
+                                            swal("Failed to laod data " + response.error.message + " !", "", "error");
+                                        }
+                                    }
+
+                                    function fail(err) {
+                                        console.log(err);
+                                        swal("Failed to laod data " + newdata.length + " !", "", "error");
+                                    }
+                                });
                     });
                     var table = $('.dataTable').DataTable({
                         dom: 'Bfrtip',

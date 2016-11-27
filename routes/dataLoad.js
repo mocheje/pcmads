@@ -7,7 +7,6 @@ var credentials = require('../config/credentials') + "PCM";
 router.post('/', function(req, res, next) {
     //get data
     var data = req.body.data;
-    var period = req.body.period;
     var values = "";
     //get objects and compare with uploaded data
     var version = "Actual";  //hard coded based on PCM version only Actual exists for now
@@ -51,6 +50,8 @@ router.post('/', function(req, res, next) {
                         char = ";";
                     }
                     var gl = data[i][3], wbs = data[i][5], currency = data[i][10] | "NGN", value = data[i][9];
+                    var arrPeriod = data[i][7].split('.');
+                    var period = arrPeriod[2] + '0' + arrPeriod[1];
                     //null items should not go into pcm
                     values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
                 }
