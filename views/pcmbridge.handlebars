@@ -41,5 +41,10 @@
 </table>
 
 <script>
-    var table = $('#pcmbridge').DataTable();
+    var table = $('#pcmbridge').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
 </script>
