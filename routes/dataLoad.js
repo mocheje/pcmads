@@ -49,7 +49,7 @@ router.post('/', function(req, res, next) {
                     if(i == data.length - 1){
                         char = ";";
                     }
-                    var gl = data[i][3], wbs = data[i][5], currency = data[i][10] | "NGN", value = data[i][9];
+                    var gl = data[i][3], wbs = data[i][5], currency = data[i][10], value = data[i][9];
                     var arrPeriod = data[i][7].split('.');
                     var period = arrPeriod[2] + '0' + arrPeriod[1];
                     //null items should not go into pcm
