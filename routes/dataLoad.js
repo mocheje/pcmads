@@ -53,7 +53,7 @@ router.post('/', function(req, res, next) {
                     var arrPeriod = data[i][7].split('.');
                     var period = arrPeriod[2] + '0' + arrPeriod[1];
                     //null items should not go into pcm
-                    values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "','" + value + "')" + char ;
+                    values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "'," + value + ")" + char ;
                 }
                 var query = "TRUNCATE TABLE [PCM].[dbo].[PCMADS_BRIDGE]; INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
                 console.log(query);
