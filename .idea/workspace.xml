@@ -28,14 +28,14 @@
       <file leaf-file-name="convert_sap_export.handlebars" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/convert_sap_export.handlebars">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="287" column="98" selection-start-line="287" selection-start-column="98" selection-end-line="287" selection-end-column="98" />
+            <state relative-caret-position="280">
+              <caret line="280" column="97" selection-start-line="280" selection-start-column="97" selection-end-line="280" selection-end-column="97" />
               <folding>
-                <marker date="1480419845564" expanded="true" signature="9891:9940" placeholder="..." />
-                <marker date="1480419845564" expanded="true" signature="10751:10769" placeholder="..." />
-                <marker date="1480419845564" expanded="true" signature="11588:11606" placeholder="..." />
-                <marker date="1480419845564" expanded="true" signature="12502:12520" placeholder="..." />
-                <marker date="1480419845564" expanded="true" signature="13557:13575" placeholder="..." />
+                <marker date="1480423263746" expanded="true" signature="9891:9940" placeholder="..." />
+                <marker date="1480423263746" expanded="true" signature="10751:10769" placeholder="..." />
+                <marker date="1480423263746" expanded="true" signature="11588:11606" placeholder="..." />
+                <marker date="1480423263746" expanded="true" signature="12502:12520" placeholder="..." />
+                <marker date="1480423263746" expanded="true" signature="13557:13575" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -301,12 +301,12 @@
       <workItem from="1480052234482" duration="17808000" />
       <workItem from="1480254994251" duration="3437000" />
       <workItem from="1480274553179" duration="7392000" />
-      <workItem from="1480418400242" duration="1446000" />
+      <workItem from="1480418400242" duration="3405000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="226512000" />
+    <option name="totallyTimeSpent" value="228471000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -694,14 +694,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/convert_sap_export.handlebars">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="287" column="98" selection-start-line="287" selection-start-column="98" selection-end-line="287" selection-end-column="98" />
+        <state relative-caret-position="280">
+          <caret line="280" column="97" selection-start-line="280" selection-start-column="97" selection-end-line="280" selection-end-column="97" />
           <folding>
-            <marker date="1480419845564" expanded="true" signature="9891:9940" placeholder="..." />
-            <marker date="1480419845564" expanded="true" signature="10751:10769" placeholder="..." />
-            <marker date="1480419845564" expanded="true" signature="11588:11606" placeholder="..." />
-            <marker date="1480419845564" expanded="true" signature="12502:12520" placeholder="..." />
-            <marker date="1480419845564" expanded="true" signature="13557:13575" placeholder="..." />
+            <marker date="1480423263746" expanded="true" signature="9891:9940" placeholder="..." />
+            <marker date="1480423263746" expanded="true" signature="10751:10769" placeholder="..." />
+            <marker date="1480423263746" expanded="true" signature="11588:11606" placeholder="..." />
+            <marker date="1480423263746" expanded="true" signature="12502:12520" placeholder="..." />
+            <marker date="1480423263746" expanded="true" signature="13557:13575" placeholder="..." />
           </folding>
         </state>
       </provider>

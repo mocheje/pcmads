@@ -277,7 +277,8 @@
                     //check if load button can be active condition all validation keys length must be 0.
                     var validationSucceed = true;
                     for (var key in validation) {
-                        if (validation.hasOwnProperty(key) && validation[key].length > 0 ) {
+                        console.log(key);
+                        if (validation.hasOwnProperty(key) && validation[key].length > 0 && key != "assignments") {
                             //set validationSucceed to false;
                             validationSucceed = false;
                         }
