@@ -44,18 +44,18 @@ router.post('/', function(req, res, next) {
         function inform(){
             completed += 1;
             if(completed == 2){
-                var char = ",";
+                var char = ";";
                 for (var i = 0; i<data.length; i++){
-                    if(i == data.length - 1){
-                        char = ";";
-                    }
+                    // if(i == data.length - 1){
+                    //     char = ";";
+                    // }
                     var gl = data[i][3], wbs = data[i][5], currency = data[i][10], value = data[i][9];
                     var arrPeriod = data[i][7].split('.');
                     var period = arrPeriod[2] + '0' + arrPeriod[1];
                     //null items should not go into pcm
-                    values += "('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "'," + value + ")" + char ;
+                    values += " INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES ('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "'," + value + ")" + char ;
                 }
-                var query = "TRUNCATE TABLE [PCM].[dbo].[PCMADS_BRIDGE]; INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES " + values;
+                var query = "TRUNCATE TABLE [PCM].[dbo].[PCMADS_BRIDGE]; " + values;
                 //console.log(query);
                 new sql.Request().query(query)
                     .then(function(recordset) {
