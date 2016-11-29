@@ -274,7 +274,19 @@
                         }
                         console.log(remove);
                     });
-                    $("#loadButton").removeClass('disabled hidden');
+                    //check if load button can be active condition all validation keys length must be 0.
+                    var validationSucceed = true;
+                    for (var key in validation) {
+                        if (validation.hasOwnProperty(key) && validation[key].length > 0 ) {
+                            //set validationSucceed to false;
+                            validationSucceed = false;
+                        }
+                    }
+                    if(validationSucceed){
+                        $("#loadButton").removeClass('disabled hidden');
+                    } else {
+                        $("#loadButton").removeClass('hidden'); //make button visible but disabled
+                    }
                     $("#validateButton").removeClass('disabled hidden');
                     $("#validateButton").on('click', function () {
                         $("#myModal").appendTo("body").modal('show');
