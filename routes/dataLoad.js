@@ -18,8 +18,8 @@ router.post('/', function(req, res, next) {
             .then(function(recordset) {
                 for(var k = 0; k< data.length; k++){
                     for(var l=0;l<recordset.length;l++){
-                        if(data[k][5] == recordset[l].NAME.split('-')[0].toString().replace(/\s+/g, '')){
-                            data[k][5] = recordset[l].NAME;
+                        if(data[k][13] == recordset[l].NAME.split('-')[0].toString().replace(/\s+/g, '')){
+                            data[k][13] = recordset[l].NAME;
                             break;
                         }
                     }
@@ -31,8 +31,8 @@ router.post('/', function(req, res, next) {
             .then(function(recordset) {
                 for(var i = 0; i< data.length; i++){
                     for(var j=0;j<recordset.length;j++){
-                        if(data[i][3].toString() == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
-                            data[i][3] = recordset[j].NAME;
+                        if(data[i][12].toString() == recordset[j].NAME.split('-')[0].toString().replace(/\s+/g, '')){
+                            data[i][12] = recordset[j].NAME;
                             break;
                         }
                     }
@@ -49,8 +49,8 @@ router.post('/', function(req, res, next) {
                     // if(i == data.length - 1){
                     //     char = ";";
                     // }
-                    var gl = data[i][3], wbs = data[i][5], currency = data[i][10], value = data[i][9];
-                    var arrPeriod = data[i][7].split('.');
+                    var gl = data[i][12], wbs = data[i][13], currency = data[i][3], value = data[i][14];
+                    var arrPeriod = data[i][11].split('.');
                     var period = arrPeriod[2] + '0' + arrPeriod[1];
                     //null items should not go into pcm
                     values += " INSERT INTO [PCM].[dbo].[PCMADS_BRIDGE] VALUES ('" + version + "','" + period + "','" + wbs + "','" + gl + "','" + currency + "'," + value + ")" + char ;
