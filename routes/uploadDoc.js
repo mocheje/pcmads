@@ -32,12 +32,12 @@ router.post('/', function(req, res, next) {
         //match with regular expression to confirm if period is valid
         var numOfRecords = obj[0].data.length;
         var data = obj[0].data;
+        newData = [];
         //get company code
         var compCode = data[1][data[1].length - 1];
         // get ledger
         var ledger = data[2][data[2].length - 1];
         var validations = {};
-        console.log("passed here");
     } catch (e){
         console.log(e);
     }
@@ -46,30 +46,41 @@ router.post('/', function(req, res, next) {
     var glflags = [], wbsflags = [], glwbsflags = [], gls = [], wbs = [], glwbs = [], l = data.length, i;
     var processed = 0;
     try {
-        for(i=7; i<l; i++){ //excluded headers
-            //get unigue wbs
-            if(!wbsflags[data[i][5]]) { //get unique wbs
-                wbsflags[data[i][5]] = true;
-                if(data[i][5])
-                    wbs.push(data[i][5]);
-            }
-            if(!glflags[data[i][3]]){ //get unique gls
-                glflags[data[i][3]] = true;
-                if(data[i][3])
-                    gls.push(data[i][3]);
-            }
-            if(!glwbsflags[data[i][5] + data[i][3]]){ //get unique gls and wbs
-                glwbsflags[data[i][5] + data[i][3]] = true;
-                if(data[i][5] + data[i][3])
-                    glwbs.push({wbs: data[i][5], gl: data[i][3].toString()});
+        for(i=0; i<l; i++){ //excluded headers
+            //skip unwanted lines
+            if(data[i].length < 18 ){
+                //delete data[i]; //delete the unwanted line from data array
+                data[i] = [];  //temp fix since delete and splice gave unwanted result
+            } else {
+                if (data[i][1]){
+                    //console.log('found header line');
+                }else {
+                    //push this item to newData
+                    newData.push(data[i]);
+                    //get unigue wbs
+                    if (!wbsflags[data[i][13]]) { //get unique wbs
+                        wbsflags[data[i][13]] = true;
+                        if (data[i][13])
+                            wbs.push(data[i][13]);
+                    }
+                    if (!glflags[data[i][12]]) { //get unique gls
+                        glflags[data[i][12]] = true;
+                        if (data[i][12])
+                            gls.push(data[i][12]);
+                    }
+                    if (!glwbsflags[data[i][13] + data[i][12]]) { //get unique gls and wbs
+                        glwbsflags[data[i][13] + data[i][12]] = true;
+                        if (data[i][13] + data[i][12])
+                            glwbs.push({wbs: data[i][13], gl: data[i][12].toString()});
+                    }
+                }
+
             }
 
         }
     } catch (e){
         console.log(e);
     }
-
-
     console.log("will connect to sql now");
     //get objects and compare with uploaded data
     sql.connect(credentials).then(function() {
@@ -166,7 +177,7 @@ router.post('/', function(req, res, next) {
     function inform(){
         completed += 1;
         if (completed === 3){
-            res.json({success: true, period: period, validations: validations, data:  data});
+            res.json({success: true, period: period, validations: validations, data:  newData});
         }
     }
 });

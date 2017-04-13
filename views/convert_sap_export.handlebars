@@ -142,9 +142,9 @@
             }
         },
         validation: {
-            allowedExtensions: ['xlsx'],
+            allowedExtensions: ['xlsx', 'xls'],
             itemLimit: 3,
-            sizeLimit: 5120000 // 50 kB = 50 * 1024 bytes
+            sizeLimit: 100240000 // 50 kB = 50 * 1024 bytes
         },
         callbacks: {
             onComplete: function (id, fileName, responseJSON) {
@@ -152,27 +152,27 @@
                 if (responseJSON.success) {
                     swal("Processing Complete!", "File Uploaded and validation complete", "success");
                     var html = "";
-                    html += '<table id="uploaded" class="display dataTable" cellspacing="0"><thead><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></thead><tfoot><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></tfoot><tbody>';
+                    html += '<table id="uploaded" class="display dataTable" cellspacing="0"><thead><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></thead><tfoot><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></tfoot><tbody>';
                     data = responseJSON.data;
                     validation = responseJSON.validations;
                     period = responseJSON.period;
                     //set period name
                     $('.qq-upload-period').html('Period: ' + period + ' NOTE* Correct file name if incorrect');
-                    data.splice(0,7);  //remove headers
+                    //data.splice(0,7);  //remove headers
                     for (var i = 0; i < data.length; i++) {
                         var item = data[i];
                         html += "<tr id='"+ i + "'><td><input type='checkbox' class='remove'></td>";  //line items starts at that position
-                        html += "<td>" + item[2] + "</td>";  //GL Account
-                        html += "<td>" + item[3] + "</td>";  //Line Item
-                        html += "<td>" + item[5] + "</td>";  //WBS
-                        html += "<td>" + item[7] + "</td>";  //Date
+                        html += "<td>" + item[4] + "</td>";  //Document Number
+                        html += "<td>" + item[12] + "</td>";  //Line Item(GL Account)
+                        html += "<td>" + item[13] + "</td>";  //WBS
+                        html += "<td>" + item[11] + "</td>";  //Date
                         html += "<td>" + item[8] + "</td>";  //Posting Key
-                        html += "<td>" + item[9] + "</td>";  //Amount
-                        html += "<td>" + item[10] + "</td>";  //Currency
-                        html += "<td>" + item[11] + "</td>";  //Tax
-                        html += "<td>" + item[12] + "</td>";  //Profit Center
-                        html += "<td>" + item[14] + "</td>";  //Text
-                        html += "<td>" + item[15] + "</td>";  //Type
+                        html += "<td>" + item[14] + "</td>";  //Amount
+                        html += "<td>" + item[3] + "</td>";  //Currency
+                        //html += "<td>" + item[11] + "</td>";  //Tax  (no tax specified in new variant)
+                        html += "<td>" + item[9] + "</td>";  //Profit Center
+                        html += "<td>" + item[15] + "</td>";  //Text
+                        html += "<td>" + item[02] + "</td>";  //Type
                         html += "</tr>";
                     }
 

@@ -1,3 +1,303 @@
+<!-- Fine Uploader Thumbnails template w/ customization
+    ====================================================================== -->
+<script type="text/template" id="qq-template-validation">
+    <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here (Only xlsx files allowed)">
+        <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+            <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+        </div>
+        <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+            <span class="qq-upload-drop-area-text-selector"></span>
+        </div>
+        <div class="qq-upload-button-selector qq-upload-button">
+            <div>Select files (*.xlsx)</div>
+        </div>
+        <div class="qq-upload-button pull-right btn disabled hidden" id="loadButton">
+            <div>Load To PCM</div>
+        </div>
+        <div class="qq-upload-button pull-right btn disabled hidden" id="validateButton">
+            <div>Validations</div>
+        </div>
+            <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>Processing dropped files...</span>
+                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+        <ul class="qq-upload-list-selector qq-upload-list" aria-live="polite" aria-relevant="additions removals">
+            <li>
+                <div class="qq-progress-bar-container-selector">
+                    <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                </div>
+                <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                <img class="qq-thumbnail-selector" qq-max-size="100" qq-server-scale>
+                <span class="qq-upload-file-selector qq-upload-file"></span>
+                <span class="qq-upload-size-selector qq-upload-size"></span>
+                <span class="qq-upload-size-selector qq-upload-period"></span>
+                <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
+                <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
+                <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
+                <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+            </li>
+        </ul>
+
+        <dialog class="qq-alert-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">Close</button>
+            </div>
+        </dialog>
+
+        <dialog class="qq-confirm-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">No</button>
+                <button type="button" class="qq-ok-button-selector">Yes</button>
+            </div>
+        </dialog>
+
+        <dialog class="qq-prompt-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <input type="text">
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">Cancel</button>
+                <button type="button" class="qq-ok-button-selector">Ok</button>
+            </div>
+        </dialog>
+    </div>
+</script>
+
+
+<!-- Fine Uploader DOM Element
+====================================================================== -->
+<div id="fine-uploader-validation"></div>
+<!-- Trigger the modal with a button -->
+
+
+
+
+
+<script>
+    remove = [];
+    var restrictedUploader = new qq.FineUploader({
+        element: document.getElementById("fine-uploader-validation"),
+        template: 'qq-template-validation',
+        request: {
+            endpoint: '/server/uploads'
+        },
+        thumbnails: {
+            placeholders: {
+                waitingPath: '/images/placeholders/waiting-generic.png',
+                notAvailablePath: '/images/placeholders/not_available-generic.png'
+            }
+        },
+        validation: {
+            allowedExtensions: ['xlsx'],
+            itemLimit: 3,
+            sizeLimit: 5120000 // 50 kB = 50 * 1024 bytes
+        },
+        callbacks: {
+            onComplete: function (id, fileName, responseJSON) {
+                //alert("Success: " + responseJSON.success);
+                if (responseJSON.success) {
+                    console.log(responseJSON);
+                    swal("Processing Complete!", "File Uploaded and validation complete", "success");
+                    var html = "";
+                    html += '<table id="uploaded" class="display dataTable" cellspacing="0"><thead><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></thead><tfoot><tr><th>Remove</th><th>Document No.</th><th>GL Account</th><th>WBS</th><th>Date</th><th>P.Key</th><th>Amount</th><th>Currency</th><th>Tax</th><th>Profit Center</th><th>Text</th></th><th>Type</th></tr></tfoot><tbody>';
+                    data = responseJSON.data;
+                    validation = responseJSON.validations;
+                    period = responseJSON.period;
+                    //set period name
+                    $('.qq-upload-period').html('Period: ' + period + ' NOTE* Correct file name if incorrect');
+                    //data.splice(0,7);  //remove headers
+                    for (var i = 0; i < data.length; i++) {
+                        if(data[i]){
+                            var item = data[i];
+                            html += "<tr id='"+ i + "'><td><input type='checkbox' class='remove'></td>";  //line items starts at that position
+                            html += "<td>" + item[2] + "</td>";  //GL Account
+                            html += "<td>" + item[3] + "</td>";  //Line Item
+                            html += "<td>" + item[5] + "</td>";  //WBS
+                            html += "<td>" + item[7] + "</td>";  //Date
+                            html += "<td>" + item[8] + "</td>";  //Posting Key
+                            html += "<td>" + item[9] + "</td>";  //Amount
+                            html += "<td>" + item[10] + "</td>";  //Currency
+                            html += "<td>" + item[11] + "</td>";  //Tax
+                            html += "<td>" + item[12] + "</td>";  //Profit Center
+                            html += "<td>" + item[14] + "</td>";  //Text
+                            html += "<td>" + item[15] + "</td>";  //Type
+                            html += "</tr>";
+                        }
+
+                    }
+
+                    html += '</tbody></table>';
+                    $('#data').append(html);
+
+                    //populate validation tabs with validation data.
+                    //GL validation population
+                    var gls = validation.gls;
+                    if (gls.length > 0 ){
+                        var glhtml = "<div><h1 style='text-align: center; border-bottom: 1px solid #ccc'> Unassigned GLS </h1></div>";
+                        glhtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th></tr></thead><tfoot><tr><th>GL Account</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < gls.length; i++) {
+                            var gl = gls[i];
+                            glhtml += "<tr>";
+                            glhtml += "<td>" + gl + "</td>";
+                            glhtml += "</tr>";
+
+                        }
+                        glhtml += '</tbody></table>';
+                        $('#glValidation').html(glhtml);
+                    }
+
+                    //WBS validation population
+                    var wbs = validation.wbs;
+                    if (wbs.length > 0 ){
+                        var wbshtml = "<div><h1 style='text-align: center'> Unassigned WBS </h1></div>";
+                        wbshtml += '<table class="dispaly dataTable"> <thead><tr><th>WBS</th></tr></thead><tfoot><tr><th>WBS</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < wbs.length; i++) {
+                            var wb = wbs[i];
+                            wbshtml += "<tr>";
+                            wbshtml += "<td>" + wb + "</td>";
+                            wbshtml += "</tr>";
+
+                        }
+                        wbshtml += '</tbody></table>';
+                        $('#wbsValidation').html(wbshtml);
+                    }
+
+                    // Assignment Validation poplation
+                    var ass = validation.assignments;
+                    if (ass.length > 0 ){
+                        var asshtml = "<div><h1 style='text-align: center'> No Assignment Exists </h1></div>";
+                        asshtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th><th>WBS</th></tr></thead><tfoot><tr><th>GL Account</th><th>WBS</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < ass.length; i++) {
+                            var as = ass[i];
+                            asshtml += "<tr>";
+                            asshtml += "<td>" + as.gl + "</td>" + "<td>" + as.wbs + "</td>";
+                            asshtml += "</tr>";
+
+                        }
+                        asshtml += '</tbody></table>';
+                        $('#assValidation').html(asshtml);
+                    }
+
+                    //Multiple gls validation population
+                    var glm = validation.multiplegls;
+                    if (glm.length > 0 ){
+                        var glmhtml = "<div><h1 style='text-align: center'> Multiple GL Assignments in PCM </h1></div>";
+                        glmhtml += '<table class="dispaly dataTable"> <thead><tr><th>GL Acoount</th><th>Assignment</th></tr></thead><tfoot><tr><th>GL Account</th><th>Assignment</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < glm.length; i++) {
+                            var gm = glm[i];
+                            for (var j = 0; j<gm.length; j++ ){
+                                glmhtml += "<tr>";
+                                glmhtml += "<td>" + gm[j].gl + "</td>" + "<td>" + gm[j].NAME + "</td>";
+                                glmhtml += "</tr>";
+                            }
+                        }
+                        glmhtml += '</tbody></table>';
+                        $('#glMulValidation').html(glmhtml);
+                    }
+
+                    //Multiple wbs validation population
+                    var wbsm = validation.multiplewbs;
+                    if (wbsm.length > 0 ){
+                        var wbsmhtml = "<div><h1 style='text-align: center'> Multiple WBS in PCM </h1></div>";
+                        wbsmhtml += '<table class="dispaly dataTable"> <thead><tr><th>WBS</th><th>Assignment</th></tr></thead><tfoot><tr><th>WBS</th><th>Assignment</th></tr></tfoot><tbody>';
+                        for (var i = 0; i < wbsm.length; i++) {
+                            var wm = wbsm[i];
+                            for (var j = 0; j<wm.length; j++ ){
+                                wbsmhtml += "<tr>";
+                                wbsmhtml += "<td>" + wm[j].wbs + "</td>" + "<td>" + wm[j].NAME + "</td>";
+                                wbsmhtml += "</tr>";
+                            }
+                        }
+                        wbsmhtml += '</tbody></table>';
+                        $('#wbsMulValidation').html(wbsmhtml);
+                    }
+
+                    $(".remove").change(function() {
+                        if(this.checked) {
+                            //push to remove array
+                            remove.push($(this).closest('tr').attr('id'));
+                            //strike through a tr line
+                            $(this).closest("tr").addClass('strike');
+                        } else {
+                            remove.splice(remove.indexOf($(this).closest('tr').attr('id')),1);
+                            $(this).closest("tr").removeClass('strike');
+                        }
+                        console.log(remove);
+                    });
+                    //check if load button can be active condition all validation keys length must be 0.
+                    var validationSucceed = true;
+                    for (var key in validation) {
+                        console.log(key);
+                        if (validation.hasOwnProperty(key) && validation[key].length > 0 && key != "assignments") {
+                            //set validationSucceed to false;
+                            validationSucceed = false;
+                        }
+                    }
+                    if(validationSucceed){
+                        $("#loadButton").removeClass('disabled hidden');
+                    } else {
+                        $("#loadButton").removeClass('hidden'); //make button visible but disabled
+                    }
+                    $("#validateButton").removeClass('disabled hidden');
+                    $("#validateButton").on('click', function () {
+                        $("#myModal").appendTo("body").modal('show');
+                    });
+                    $("#loadButton").on('click', function () {
+                        swal({
+                                    title: "Load to PCM",
+                                    text: "Submit to Load data into PCM Bridge",
+                                    type: "info",
+                                    showCancelButton: true,
+                                    closeOnConfirm: false,
+                                    showLoaderOnConfirm: true,
+                                },
+                                function () {
+                                    //remove all elements from data that has been highlighted in remove array
+                                    var newdata = data;
+                                    for (var i = 0; i < remove.length; i++) {
+                                        newdata.splice(data[remove[i]], 1);
+                                    }
+                                    //load data via ajax.
+                                    // /server/dataload
+                                    $.ajax({
+                                        url: '/server/dataload'
+                                        , type: 'POST'
+                                        , contentType: 'application/json'
+                                        , dataType: 'json'
+                                        , data: JSON.stringify({"data": newdata, "period": period})
+                                        , success: done.bind(this)
+                                        , error: fail.bind(this)
+//, processData: false //Doesn't help
+                                    });
+                                    function done(response) {
+                                        console.log(response);
+                                        if (response.success) {
+                                            swal("Data Loaded", "Previous data removed and new Data loaded into PCM Bridge Successfully Count " + newdata.length, "success");
+                                        } else {
+                                            swal("Failed to laod data " + response.error.message + " !", "", "error");
+                                        }
+                                    }
+
+                                    function fail(err) {
+                                        console.log(err);
+                                        swal("Failed to laod data " + newdata.length + " !", "", "error");
+                                    }
+                                });
+                    });
+                    var table = $('.dataTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ]
+                    });
+                } else {
+                    swal("error", "Unable to process file", "error");
+                }
+            }
+        }
+    });
+</script>
 <div>
     <h2 style="text-align: center">
         Convert PCM Extract into SAP FORMAT
