@@ -314,6 +314,7 @@
                                         , type: 'POST'
                                         , contentType: 'application/json'
                                         , dataType: 'json'
+                                        , timeout: 15000000
                                         , data: JSON.stringify({"data": newdata, "period": period})
                                         , success: done.bind(this)
                                         , error: fail.bind(this)
